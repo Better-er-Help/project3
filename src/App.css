@@ -2,7 +2,7 @@
   display: grid;
   place-items: center;
   height: 100vh;
-  background-color: lightblue;
+  background-color: rgb(37, 150, 190);
 }
 
 .appbody {
