@@ -1,3 +1,5 @@
+require( 'dotenv' ).config()
+
 const path = require('path')
 const express = require('express');
 const app = express();
@@ -16,7 +18,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/paws", {
     useFindAndModify: false
 });
 
-app.use(require('./routes/api'))
+app.use(require('./api/router.js'))
 
 app.get('*', (req, res) => {
   console.log("[HTML GET]: Get React app");
