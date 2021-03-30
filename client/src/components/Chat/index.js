@@ -8,9 +8,12 @@ import {
 import MicIcon from "@material-ui/icons/Mic";
 import React from "react";
 import "./style.css";
+import Sidebar from "../Sidebar";
 
 function Chat() {
   return (
+    <>
+    <Sidebar/>
     <div className="chat">
       <div className="chatHeader">
         <Avatar />
@@ -67,6 +70,7 @@ function Chat() {
         <MicIcon />
       </div>
     </div>
+    </>
   );
 }
 

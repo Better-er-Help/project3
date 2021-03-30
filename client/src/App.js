@@ -1,15 +1,23 @@
-import Sidebar from "./components/Sidebar";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import Chat from "./components/Chat";
+import Signup from "./components/Signup/signup"
+import Login from './components/Login/login'
 import "./App.css";
 
 function App() {
   return (
-    <div className="app">
-      <div className="appbody">
-        <Sidebar />
-        <Chat />
+    <>
+    <Router>
+      <Login/>
+      <div className="app">
+        <div className="appbody">
+          <Route exact path='/' component={Chat}/>
+          <Route exact path='/signup' component={Signup}/>
+        </div>
       </div>
-    </div>
+    </Router>
+    </>
   );
 }
 
