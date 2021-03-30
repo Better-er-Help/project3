@@ -1,4 +1,4 @@
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 
 
 const router = require('express').Router();
@@ -87,7 +87,7 @@ router.post('/login', (req,res) => {
         error: err,
       });
     });
-});
+
 
 
 router.delete("/:userId", (req, res, next) => {
@@ -108,14 +108,5 @@ router.delete("/:userId", (req, res, next) => {
     });
 });
 
-// router.post('/api/books', (req,res) => {
-//     Paws.create({})
-//     .then( r => {
-//         res.json(r);
-//       })
-//     .catch( err => {
-//         res.json(err)
-//       })
-// })
 
 module.exports = router;
