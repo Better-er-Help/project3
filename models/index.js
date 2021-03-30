@@ -1,3 +1,4 @@
 module.exports = {
-    Paws: require('./paws')
+    Paws: require('./paws'),
+    User: require('./user')
 }

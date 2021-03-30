@@ -1,24 +1,121 @@
 const router = require('express').Router();
-const Paws = require('../models/books');
+const mongoose = require('mongoose')
+const bcrypt = requite('bcrypt')
+const Paws = require('../models/index.js');
+const User = require('../models/index.js')
 
-router.get('/api/books', (req,res) => {
-    Paws.find({})
-    .then( pawsDB => {
-        res.json(pawsDB);
-      })
-    .catch((err) => {
-        res.json(err);
-      });
+// router.get('/api/books', (req,res) => {
+//     Paws.find({})
+//     .then( pawsDB => {
+//         res.json(pawsDB);
+//       })
+//     .catch((err) => {
+//         res.json(err);
+//       });
+// })
+
+
+
+router.post('/signup', (req, res, next) => {
+    User.find({email: req.body.eamil})
+        .exec()
+        .then(user => {
+            if (user.length > 0) {
+                return res.status(409).json({
+                    message: 'Mail exists'
+                })
+            } else {
+            bcrypt.hash(req.body.email, 10, (err, hash) => {
+                if (err) {
+                    return res.status(500).json({
+                        error: err
+                    })
+                } else {
+                    const user = new User({
+                        _id: mongoose.Schema.Types.ObjectId(),
+                        email: req.body.email,
+                        password: hash
+                    })
+                    user
+                        .save()
+                        .then( result => {
+                            console.log(result)
+                            res.status(201).json({
+                                message: 'User created'
+                            })
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            res.status(500).json({
+                                error: err
+                            })
+                        })
+                    }
+                })
+            }
+        })
+        .catch();
 })
 
-router.post('/api/books', (req,res) => {
-    Paws.create({})
-    .then( r => {
-        res.json(r);
-      })
-    .catch( err => {
-        res.json(err)
-      })
+router.post('/login', (req,res,next) => {
+    User.find({ email: req.body.email })
+    .exect()
+    .then(user => {
+        if (user.length < 1) {
+            return res.status(401).json({
+                message: 'Auth failed'
+            })
+        }
+        bcrypt.compare(req.body.password, user[0].password, (err,result) => {
+            if (err) {
+                return res.status(401).json({
+                    message: 'Auth failed'
+                })
+            }
+            if (result) {
+                return res.status(200).json({
+                    message: 'Auth successful'
+                })
+            }
+            res.status(401).json({
+                message: 'Auth failed'
+            })
+            })
+        
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    })
 })
+
+router.delete('/:userId', (req,res,next) => {
+    User.remove({_id: req.params.userId})
+    .exec()
+    .then(result => {
+        res.status(200).json({
+            message: "User deleted"
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({
+            error: err
+        })
+    })
+})
+
+
+// router.post('/api/books', (req,res) => {
+//     Paws.create({})
+//     .then( r => {
+//         res.json(r);
+//       })
+//     .catch( err => {
+//         res.json(err)
+//       })
+// })
 
 module.exports = router
