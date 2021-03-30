@@ -2,25 +2,13 @@ require( 'dotenv' ).config()
 
 const router = require('express').Router();
 const mongoose = require('mongoose')
-const bcrypt = requite('bcrypt')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const Paws = require('../models/index.js');
-const User = require('../models/index.js')
-
-// router.get('/api/books', (req,res) => {
-//     Paws.find({})
-//     .then( pawsDB => {
-//         res.json(pawsDB);
-//       })
-//     .catch((err) => {
-//         res.json(err);
-//       });
-// })
+const {User} = require('../models/index.js')
 
 
-
-router.post('/signup', (req, res, next) => {
-    User.find({email: req.body.eamil})
+router.post('/signup', (req,res) => {
+    User.find({email: req.body.email})
         .exec()
         .then(user => {
             if (user.length > 0) {
@@ -28,14 +16,14 @@ router.post('/signup', (req, res, next) => {
                     message: 'Mail exists'
                 })
             } else {
-            bcrypt.hash(req.body.email, 10, (err, hash) => {
+            bcrypt.hash(req.body.password, 10, (err, hash) => {
                 if (err) {
                     return res.status(500).json({
                         error: err
                     })
                 } else {
                     const user = new User({
-                        _id: mongoose.Schema.Types.ObjectId(),
+                        _id: mongoose.Types.ObjectId(),
                         email: req.body.email,
                         password: hash
                     })
@@ -60,9 +48,9 @@ router.post('/signup', (req, res, next) => {
         .catch();
 })
 
-router.post('/login', (req,res,next) => {
+router.post('/login', (req,res) => {
     User.find({ email: req.body.email })
-    .exect()
+    .exec()
     .then(user => {
         if (user.length < 1) {
             return res.status(401).json({
@@ -102,7 +90,7 @@ router.post('/login', (req,res,next) => {
     })
 })
 
-router.delete('/:userId', (req,res,next) => {
+router.delete('/:userId', (req,res) => {
     User.remove({_id: req.params.userId})
     .exec()
     .then(result => {
@@ -117,16 +105,5 @@ router.delete('/:userId', (req,res,next) => {
         })
     })
 })
-
-
-// router.post('/api/books', (req,res) => {
-//     Paws.create({})
-//     .then( r => {
-//         res.json(r);
-//       })
-//     .catch( err => {
-//         res.json(err)
-//       })
-// })
 
 module.exports = router
