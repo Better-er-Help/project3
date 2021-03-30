@@ -8,6 +8,6 @@ const UserSchema = new Schema({
   received: Boolean,
 });
 
-const Paws = mongoose.model("Paws", UserSchema);
+const Paws = mongoose.model("messagecontents", UserSchema);
 
 module.exports = Paws;
