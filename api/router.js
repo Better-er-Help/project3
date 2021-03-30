@@ -5,7 +5,7 @@ const router = require('express').Router();
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const {User} = require('../models/index.js')
+const { User } = require('../models/index.js')
 
 
 
@@ -48,7 +48,6 @@ router.post('/signup', (req,res) => {
                 })
             }
         })
-        .catch();
 })
 
 router.post('/login', (req,res) => {
@@ -60,6 +59,7 @@ router.post('/login', (req,res) => {
                 message: 'Auth failed'
             })
         }
+        bcrypt.compare(req.body.password, user[0].password, (err, res)=> {
         if (result) {
           const token = jwt.sign(
             {
@@ -87,7 +87,7 @@ router.post('/login', (req,res) => {
         error: err,
       });
     });
-
+})
 
 
 router.delete("/:userId", (req, res, next) => {
