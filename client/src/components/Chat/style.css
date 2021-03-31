@@ -41,7 +41,7 @@
   background-color: white;
   margin-bottom: 30px;
 }
-.chatReciever {
+.chatReceiver {
   margin-left: auto;
   background-color: lightblue;
 }
@@ -69,6 +69,7 @@
 }
 .chatFooter > form > input {
   flex: 1;
+  outline-width: 0;
   border-radius: 30px;
   padding: 10px;
   border: none;
