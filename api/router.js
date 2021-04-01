@@ -1,5 +1,11 @@
 require("dotenv").config();
 
+const router = require("express").Router();
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { User } = require("../models/index.js");
+
 
 const router = require('express').Router();
 const mongoose = require('mongoose')
@@ -50,9 +56,10 @@ router.post('/signup', (req,res) => {
         })
 })
 
-router.post('/login', (req,res) => {
-    User.find({ email: req.body.email })
+router.post("/login", (req, res) => {
+  User.find({ email: req.body.email })
     .exec()
+
     .then(user => {
         if (user.length < 1) {
             return res.status(401).json({
@@ -60,6 +67,7 @@ router.post('/login', (req,res) => {
             })
         }
         bcrypt.compare(req.body.password, user[0].password, (err, res)=> {
+
         if (result) {
           const token = jwt.sign(
             {
@@ -90,23 +98,23 @@ router.post('/login', (req,res) => {
 })
 
 
-router.delete("/:userId", (req, res, next) => {
-  User.remove({ _id: req.params.userId })
+  router.delete("/:userId", (req, res, next) => {
+    User.remove({ _id: req.params.userId })
 
-    .exec()
-    .then((result) => {
-      res.status(200).json({
-        message: "User deleted",
-      });
-    })
+      .exec()
+      .then((result) => {
+        res.status(200).json({
+          message: "User deleted",
+        });
+      })
 
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          error: err,
+        });
       });
-    });
+  });
 });
-
 
 module.exports = router;
