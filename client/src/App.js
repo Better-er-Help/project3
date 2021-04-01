@@ -18,25 +18,18 @@ function App() {
     setMessages(res.data);
   }, []);
 
-  //  useEffect(() => {
-  //    async function getData() {
-  //      const data = await axios.get("/messages/sync");
-  //      setMessages(data);
-  //    }
-  //  }, []);
-
   // this is the realtime mongo hookup.
   console.log(messages);
   useEffect(() => {
     const pusher = new Pusher("19b49e3760d87d26f1b4", {
       cluster: "us2",
     });
-
     const channel = pusher.subscribe("messages");
     channel.bind("inserted", function (data) {
       alert(JSON.stringify(data));
       setMessages([...messages, data]);
     });
+    //clean up function
     return () => {
       channel.unbind_all();
       channel.unsubscribe();

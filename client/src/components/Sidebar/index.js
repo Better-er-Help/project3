@@ -1,5 +1,5 @@
 import { DonutLarge } from "@material-ui/icons";
-import React from "react";
+import { React, useState } from "react";
 import "./index.css";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -8,7 +8,13 @@ import { Avatar, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import SidebarChat from "../SidebarChat";
 
-function Sidebar() {
+function Sidebar({ addNewChat }) {
+  const [rooms, setRooms] = useState([]);
+
+  // useEffect(() => {
+  //   db;
+  // }, []);
+
   return (
     <div className="sidebar">
       <div className="sidebarHeader">
@@ -32,7 +38,7 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebarChat">
-        <SidebarChat />
+        <SidebarChat addNewChat />
         <SidebarChat />
         <SidebarChat />
       </div>
