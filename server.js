@@ -1,3 +1,4 @@
+require("dot-env").config();
 const { user } = require("./models/index");
 const path = require("path");
 const express = require("express");
