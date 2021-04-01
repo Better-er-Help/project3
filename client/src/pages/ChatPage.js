@@ -2,10 +2,19 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Pusher from "pusher-js";
 import Chat from "../components/Chat";
+import axios from "../axios";
 
-import "./App.css";
+import "../App.css";
 
 // import axios from "axios";
+
+const pusher = new Pusher({
+  appId: "1181172",
+  key: "19b49e3760d87d26f1b4",
+  secret: "6d5750574c9e674d70dc",
+  cluster: "us2",
+  useTLS: true,
+});
 
 function ChatPage() {
   //settign states

@@ -37,4 +37,4 @@ router.post("/messages/new", (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;
