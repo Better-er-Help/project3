@@ -6,6 +6,7 @@ const messageSchema = new Schema({
   name: String,
   timestamp: String,
   received: Boolean,
+  roomName: String,
 });
 
 module.exports = mongoose.model("messagecontents", messageSchema);

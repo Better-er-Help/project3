@@ -28,6 +28,7 @@ function Chat({ messages }) {
       name: "demo",
       timestamp: "just now!",
       received: false,
+      roomName: "DanceRoom",
     });
     setInput("");
   };
@@ -56,16 +57,20 @@ function Chat({ messages }) {
         </div>
 
         <div className="chatBody">
-          {messages.map((message, key = message.id) => {
-            return (
-              <p
-                className={`chatMessage ${message.received && "chatReceiver"}`}
-              >
-                <span className="chatName">{message.name}</span>
-                {message.message}
-                <span className="chatTimestamp">{message.timestamp}</span>
-              </p>
-            );
+          {messages.map((message) => {
+            if (message.roomName == "DanceRoom") {
+              return (
+                <p
+                  className={`chatMessage ${
+                    message.received && "chatReceiver"
+                  }`}
+                >
+                  <span className="chatName">{message.name}</span>
+                  {message.message}
+                  <span className="chatTimestamp">{message.timestamp}</span>
+                </p>
+              );
+            }
           })}
         </div>
         <div className="chatFooter">
