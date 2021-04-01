@@ -67,33 +67,6 @@ db.once("open", () => {
 
 app.use(require("./api/router.js"));
 
-// api routes that we are using for messages
-app.get("/", (req, res) => {
-  if (res.status(200)) {
-    res.send("hello world");
-  } else {
-    console.log("fail");
-  }
-});
-
-app.get("/messages", (req, res) => {
-  Messages.find({}).then((data) => {
-    console.log("data: ", data);
-    res.status(200).send(data);
-  });
-});
-
-app.post("/messages/new", (req, res) => {
-  const dbMessage = req.body;
-  Messages.create(dbMessage, (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(201).send(`new message created: \n ${data}`);
-    }
-  });
-});
-
 // app.get("*", (req, res) => {
 //   console.log("[HTML GET]: Get React app");
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
