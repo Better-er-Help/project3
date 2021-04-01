@@ -1,4 +1,4 @@
 module.exports = {
-    Paws: require('./paws'),
-    User: require('./user')
-}
+  Messages: require("./dbMessages"),
+  User: require("./user"),
+};

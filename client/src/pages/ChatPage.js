@@ -1,14 +1,22 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Pusher from "pusher-js";
-import Chat from "./components/Chat";
-import Signup from "./components/Signup/signup";
-import Login from "./components/Login/login";
-import "./App.css";
-import axios from "./axios";
+import Chat from "../components/Chat";
+import axios from "../axios";
+
+import "../App.css";
+
 // import axios from "axios";
 
-function App() {
+const pusher = new Pusher({
+  appId: "1181172",
+  key: "19b49e3760d87d26f1b4",
+  secret: "6d5750574c9e674d70dc",
+  cluster: "us2",
+  useTLS: true,
+});
+
+function ChatPage() {
   //settign states
   const [messages, setMessages] = useState([]);
 
@@ -17,13 +25,6 @@ function App() {
     const res = await axios.get("/messages");
     setMessages(res.data);
   }, []);
-
-  //  useEffect(() => {
-  //    async function getData() {
-  //      const data = await axios.get("/messages/sync");
-  //      setMessages(data);
-  //    }
-  //  }, []);
 
   // this is the realtime mongo hookup.
   console.log(messages);
@@ -34,7 +35,7 @@ function App() {
 
     const channel = pusher.subscribe("messages");
     channel.bind("inserted", function (data) {
-      alert(JSON.stringify(data));
+      // alert(JSON.stringify(data));
       setMessages([...messages, data]);
     });
     return () => {
@@ -46,18 +47,13 @@ function App() {
 
   return (
     <>
-      <Router>
-        <Login />
-        <div className="app">
-          <div className="appbody">
-            <Chat messages={messages} />
-            {/* <Route exact path="/" component={Chat({ messages })} /> */}
-            <Route exact path="/signup" component={Signup} />
-          </div>
+      <div className="app">
+        <div className="appbody">
+          <Chat messages={messages} />
         </div>
-      </Router>
+      </div>
     </>
   );
 }
 
-export default App;
+export default ChatPage;
