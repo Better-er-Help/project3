@@ -51,7 +51,7 @@ function App() {
         <div className="app">
           <div className="appbody">
             <Chat messages={messages} />
-            {/* <Route exact path="/" component={Chat({ messages })} /> */}
+            {/* <Route exact path="/" component={Chat{ messages }} /> */}
             <Route exact path="/signup" component={Signup} />
           </div>
         </div>
