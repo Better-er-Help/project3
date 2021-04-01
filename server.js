@@ -1,5 +1,5 @@
-require("dot-env").config();
-const { user } = require("./models/index");
+require("dotenv").config();
+
 const path = require("path");
 const express = require("express");
 const app = express();
@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const Messages = require("./models/dbMessages.js");
 const Pusher = require("pusher");
 const cors = require("cors");
+const auth = require('./api/auth')
 
 const PORT = process.env.PORT || 3001;
 
@@ -82,7 +83,7 @@ app.get("/messages", (req, res) => {
   });
 });
 
-app.post("/messages/new", (req, res) => {
+app.post("/messages/new", auth, (req, res) => {
   const dbMessage = req.body;
   Messages.create(dbMessage, (err, data) => {
     if (err) {

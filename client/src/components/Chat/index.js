@@ -10,9 +10,15 @@ import { React, useState, setState } from "react";
 import "./style.css";
 import Sidebar from "../Sidebar";
 import axios from "../../axios";
+import { useStoreContext } from "../../utils/GlobalStore"
 
 function Chat({ messages }) {
   const [input, setInput] = useState("");
+  const [{name, token}, dispatch] = useStoreContext()
+
+  function test(){
+    console.log({name,token})
+  }
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -28,6 +34,7 @@ function Chat({ messages }) {
   };
   return (
     <>
+    <button onClick={test}>testttt</button>
       <Sidebar />
       <div className="chat">
         <div className="chatHeader">
