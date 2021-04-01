@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { StoreProvider } from "./utils/GlobalStore"
 import Pusher from "pusher-js";
 import Chat from "./components/Chat";
 import Signup from "./components/Signup/signup";
@@ -46,6 +47,7 @@ function App() {
 
   return (
     <>
+    <StoreProvider>
       <Router>
         <Login />
         <div className="app">
@@ -56,6 +58,7 @@ function App() {
           </div>
         </div>
       </Router>
+      </StoreProvider>
     </>
   );
 }
