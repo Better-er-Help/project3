@@ -41,11 +41,13 @@ function App() {
   console.log(messages);
 
   return (
+    
     <>
     <StoreProvider>
-      <Header/>
-      <Section/>
       <Router>
+      <Header>
+        <Section/>
+      </Header>
         <Login />
         <div className="app">
           <div className="appbody">
