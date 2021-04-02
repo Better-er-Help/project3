@@ -83,7 +83,7 @@ function LoginForm(){
                         <label htmlFor="enterpass" className="form-label">Password</label>
                         <input type="password" className="form-control" ref={passRef}/>
                       </div>
-                      <a className="signup" className="btn-close" data-bs-dismiss="modal" aria-label="Close"><Link to='/signup'>Sign-up</Link></a>
+                      <a className="signup"><Link to='/signup'>Sign-up</Link></a>
                       <button className="btn btn-primary float-end" onClick={login}>Log in</button>
                     </form>
                   </div>
