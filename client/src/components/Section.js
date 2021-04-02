@@ -5,9 +5,8 @@ import About from './section/About';
 import Login from './section/Login';
 import {BrowserRouter as Route, Router} from 'react-router-dom';
 
-// export class Section extends Component {
-//     render() {
-        function Section(){
+export class Section extends Component {
+    render() {
         return (
             <section>
                     <Route path ="/" component={Home} />
@@ -16,8 +15,7 @@ import {BrowserRouter as Route, Router} from 'react-router-dom';
                     <Route path ="/Login" component={Login} />
             </section>
         )
-        }
-//     }
-// }
+    }
+}
 
 export default Section
