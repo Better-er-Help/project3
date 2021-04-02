@@ -1,5 +1,5 @@
 import { DonutLarge } from "@material-ui/icons";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import "./index.css";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -10,18 +10,26 @@ import SidebarChat from "../SidebarChat";
 import axios from "axios";
 
 function Sidebar({ addNewChat }) {
-  const data = [];
-  async function getRooms() {
-    const roomdata = await axios.get("/rooms");
-    data.push(roomdata.data);
+  const [rooms, setRooms] = useState([]);
+
+  function getRooms() {
+    return axios.get("/rooms");
   }
-  getRooms();
-  console.log(data);
+
+  useEffect(async () => {
+    const data = await getRooms();
+    setRooms(data.data);
+    console.log(rooms);
+  }, []);
+
   //rooms.map((room) => console.log(room));
   // useEffect(() => {
   //   db;
   // }, []);
 
+  // function log() {
+  //   console.log(data);
+  // }
   return (
     <div className="sidebar">
       <div className="sidebarHeader">
@@ -46,8 +54,11 @@ function Sidebar({ addNewChat }) {
       </div>
       <div className="sidebarChat">
         <SidebarChat addNewChat />
-
-        <SidebarChat />
+        {/* <button onClick={log}>here </button>; */}
+        {rooms.map((room) => {
+          console.log(room);
+          return <SidebarChat name={room} />;
+        })}
       </div>
     </div>
   );

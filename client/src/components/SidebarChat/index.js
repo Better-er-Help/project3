@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 import { Avatar } from "@material-ui/core";
 
-function SidebarChat({ addNewChat }) {
+function SidebarChat({ addNewChat, name }) {
   const createChat = () => {
     const roomName = prompt("please enter chat name");
 
@@ -10,13 +10,11 @@ function SidebarChat({ addNewChat }) {
       // do something with data base
     }
   };
-
   return !addNewChat ? (
     <div className="sidebarChat">
       <Avatar />
       <div className="sidebarChatInfo">
-        <h2>Room</h2>
-        <p>This is the last message</p>
+        <h2>{name}</h2>
       </div>
     </div>
   ) : (
