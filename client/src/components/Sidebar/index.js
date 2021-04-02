@@ -7,10 +7,17 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { Avatar, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import SidebarChat from "../SidebarChat";
+import axios from "axios";
 
 function Sidebar({ addNewChat }) {
-  const [rooms, setRooms] = useState([]);
-
+  const data = [];
+  async function getRooms() {
+    const roomdata = await axios.get("/rooms");
+    data.push(roomdata.data);
+  }
+  getRooms();
+  console.log(data);
+  //rooms.map((room) => console.log(room));
   // useEffect(() => {
   //   db;
   // }, []);
@@ -39,7 +46,7 @@ function Sidebar({ addNewChat }) {
       </div>
       <div className="sidebarChat">
         <SidebarChat addNewChat />
-        <SidebarChat />
+
         <SidebarChat />
       </div>
     </div>

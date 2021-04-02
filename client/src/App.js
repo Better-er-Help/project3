@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { StoreProvider } from "./utils/GlobalStore"
+import { StoreProvider } from "./utils/GlobalStore";
 import Pusher from "pusher-js";
 import Chat from "./components/Chat";
 import Signup from "./components/Signup/signup";
@@ -20,14 +20,12 @@ function App() {
   }, []);
 
   // this is the realtime mongo hookup.
-  console.log(messages);
   useEffect(() => {
     const pusher = new Pusher("19b49e3760d87d26f1b4", {
       cluster: "us2",
     });
     const channel = pusher.subscribe("messages");
     channel.bind("inserted", function (data) {
-      alert(JSON.stringify(data));
       setMessages([...messages, data]);
     });
     //clean up function
@@ -36,21 +34,20 @@ function App() {
       channel.unsubscribe();
     };
   }, [messages]);
-  console.log(messages);
 
   return (
     <>
-    <StoreProvider>
-      <Router>
-        <Login />
-        <div className="app">
-          <div className="appbody">
-            <Chat messages={messages} />
-            {/* <Route exact path="/" component={Chat({ messages })} /> */}
-            <Route exact path="/signup" component={Signup} />
+      <StoreProvider>
+        <Router>
+          <Login />
+          <div className="app">
+            <div className="appbody">
+              <Chat messages={messages} />
+              {/* <Route exact path="/" component={Chat({ messages })} /> */}
+              <Route exact path="/signup" component={Signup} />
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
       </StoreProvider>
     </>
   );

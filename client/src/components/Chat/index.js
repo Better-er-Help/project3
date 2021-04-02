@@ -10,38 +10,41 @@ import { React, useState, setState } from "react";
 import "./style.css";
 import Sidebar from "../Sidebar";
 import axios from "../../axios";
-import { useStoreContext } from "../../utils/GlobalStore"
+import Timestamp from "react-timestamp";
+import { useStoreContext } from "../../utils/GlobalStore";
 
 function Chat({ messages }) {
   const [input, setInput] = useState("");
-  const [{name, token}, dispatch] = useStoreContext()
+  const [{ name, token }, dispatch] = useStoreContext();
 
-  function test(){
-    console.log({name,token})
+  function test() {
+    console.log({ name, token });
   }
+  const timeElapsed = Date.now();
+  const today = new Date(timeElapsed);
+  const ATM = today.toUTCString();
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
     await axios.post("/messages/new", {
       message: input,
-      name: "demo",
-      timestamp: "just now!",
+      name: `${name}`,
+      timestamp: `${ATM}`,
       received: false,
-      roomName: "DanceRoom",
+      roomName: `${name}`,
     });
     setInput("");
   };
   return (
     <>
-    <button onClick={test}>testttt</button>
+      <button onClick={test}>testttt</button>
       <Sidebar />
       <div className="chat">
         <div className="chatHeader">
           <Avatar />
           <div className="chatHeaderInfo">
-            <h3>Room name</h3>
-            <p>Last seens at ...</p>
+            <h3>{name}</h3>
           </div>
           <div className="chatHeaderRight">
             <IconButton>
@@ -58,7 +61,7 @@ function Chat({ messages }) {
 
         <div className="chatBody">
           {messages.map((message) => {
-            if (message.roomName == "DanceRoom") {
+            if (message.roomName === `${name}`) {
               return (
                 <p
                   className={`chatMessage ${
