@@ -7,6 +7,8 @@ import Signup from "./components/Signup/signup";
 import Login from "./components/Login/login";
 import "./App.css";
 import axios from "./axios";
+import Header from "./components/Header"
+import Section from "./components/Section"
 // import axios from "axios";
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
   return (
     <>
     <StoreProvider>
+      <Header/>
+      <Section/>
       <Router>
         <Login />
         <div className="app">
