@@ -21,20 +21,14 @@ function Sidebar({ addNewChat }) {
     setRooms(data.data);
     console.log(rooms);
   }, []);
-
-  //rooms.map((room) => console.log(room));
-  // useEffect(() => {
-  //   db;
-  // }, []);
-
-  // function log() {
-  //   console.log(data);
-  // }
+  function loadChat(id) {
+    console.log(id);
+  }
   return (
     <div className="sidebar">
       <div className="sidebarHeader">
-        <Avatar src="https://www.lomsnesvet.ca/wp-content/uploads/sites/21/2019/08/Kitten-Blog-683x1024.jpg" />
         <div className="sidebarHeaderRight">
+          <h2>Chats</h2>
           <IconButton>
             <DonutLargeIcon />
           </IconButton>
@@ -57,7 +51,7 @@ function Sidebar({ addNewChat }) {
         {/* <button onClick={log}>here </button>; */}
         {rooms.map((room) => {
           console.log(room);
-          return <SidebarChat name={room} />;
+          return <SidebarChat name={room} onClick={loadChat(room)} />;
         })}
       </div>
     </div>
