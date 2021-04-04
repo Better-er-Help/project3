@@ -1,6 +1,5 @@
 import {Link} from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react'
-import Smiley from '../imgs/AwesomeFace.png'
 import './login.css'
 import { useStoreContext } from "../../utils/GlobalStore"
 
@@ -44,36 +43,32 @@ function LoginForm(){
     dispatch({ type: 'USER_LOGIN', data: {name:email, token: token }})
   }
 
-  function test(){
-    console.log(pcUser)
-    console.log({name,token})
+  const [showModal, setShowModal] = useState(false)
+
+  function toggleModal(){
+    setShowModal(true)
+  }
+
+  function dismissModal (){
+    setShowModal(false)
   }
 
     return (
         <>
 
-        <button onClick={test}>test</button>
-        <div className="navbar">
-          <div className="container mx-2" style={{width: 'max-content'}}>
-            <img src={Smiley} alt="" width="30px" height="30px"/>
-            <Link to='/'>Chat</Link>
-            <Link to='/signup'>Sign-up</Link>
-          </div>
-          <button type="button" className="btn float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="button" className="btn btn-dark" onClick={toggleModal}>
                     Log in
-                </button>
-        </div>
+          </button>
 
-        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog">
+        <div className="modalSign" style={{display: showModal === true ? 'block' : 'none'}}>
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">Log in</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button className="btn closeModal" onClick={dismissModal}>&times;</button>
               </div>
-              <div className="modal-body">
+              <div className="modalBody">
                   
-                  <div className="container d-flex justify-content-center">
+                  <div className="containerModal">
                     <form>
                       <div className="mb-3">
                         <label htmlFor="enteruse" className="form-label">Username</label>
@@ -83,14 +78,13 @@ function LoginForm(){
                         <label htmlFor="enterpass" className="form-label">Password</label>
                         <input type="password" className="form-control" ref={passRef}/>
                       </div>
-                      <a className="signup"><Link to='/signup'>Sign-up</Link></a>
+                      <Link to='/signup' className="signupA" onClick={dismissModal}>Sign-up</Link>
                       <button className="btn btn-primary float-end" onClick={login}>Log in</button>
                     </form>
                   </div>
 
               </div>
             </div>
-          </div>
         </div>
       </>
     )

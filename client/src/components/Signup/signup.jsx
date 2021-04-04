@@ -29,7 +29,7 @@ function SignUpPage(){
 
     return(
         <div className="wrapper">
-            <form>
+            <form className="signupForm">
                 <div>
                     <label htmlFor="username" className="form-label">Username</label>
                     <input className="form-control" ref={userRef}/>
@@ -38,7 +38,7 @@ function SignUpPage(){
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" className="form-control" ref={passRef}/>
                 </div>
-                <button className="signupBTN" onClick={signup}>Sign up</button>
+                <button className="btn btn-primary signupBTN" onClick={signup}>Sign up</button>
             </form>
         </div>
     )
