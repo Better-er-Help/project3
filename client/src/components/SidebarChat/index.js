@@ -11,11 +11,11 @@ function SidebarChat({ addNewChat, name }) {
     // return letters[0];
   }
 
-  function getColor() {
-    const colors = ["blue", "red", "orange", "green", "purple", "pink"];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    return randomColor;
-  }
+  // function getColor() {
+  //   const colors = ["blue", "red", "orange", "green", "purple", "pink"];
+  //   const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  //   return randomColor;
+  // }
 
   const createChat = () => {
     const roomName = prompt("please enter chat name");
@@ -32,7 +32,7 @@ function SidebarChat({ addNewChat, name }) {
 
   return !addNewChat ? (
     <div onClick={loadChat} className="sidebarChat">
-      <Avatar style={{ backgroundColor: getColor() }}>
+      <Avatar style={{ backgroundColor: "purple" }}>
         {getFirst({ name })}
       </Avatar>
       <div className="sidebarChatInfo">

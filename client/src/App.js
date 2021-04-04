@@ -1,16 +1,12 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
+
 import { StoreProvider } from "./utils/GlobalStore";
-import Pusher from "pusher-js";
+
 import Chat from "./components/Chat";
-import UserChat from "./components/UserChat";
-import AdminChat from "./components/AdminChat";
+
 import Signup from "./components/Signup/signup";
 import Login from "./components/Login/login";
 import "./App.css";
-import axios from "./axios";
-
-import BothChat from "./components/BothChat";
 
 import Header from "./components/Header";
 import Section from "./components/Section";

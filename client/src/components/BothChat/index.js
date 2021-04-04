@@ -6,14 +6,13 @@ import {
   SearchOutlined,
 } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
-import { React, useState, setState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import "./style.css";
 import Sidebar from "../Sidebar";
 import axios from "../../axios";
-import { getColor, getFirst } from "../SidebarChat";
-import Timestamp from "react-timestamp";
+
 import { useStoreContext } from "../../utils/GlobalStore";
-import UserChat from "../UserChat";
+
 const admin = "admin@admin.com";
 const adminColor = "purple";
 

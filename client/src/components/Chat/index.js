@@ -1,23 +1,13 @@
-import { Avatar, IconButton } from "@material-ui/core";
 import Pusher from "pusher-js";
-import {
-  AttachFile,
-  InsertEmoticon,
-  MoreVert,
-  SearchOutlined,
-} from "@material-ui/icons";
-import MicIcon from "@material-ui/icons/Mic";
-import { React, useState, useEffect, setState } from "react";
+
+import { React, useState, useEffect } from "react";
 import "./style.css";
-import Sidebar from "../Sidebar";
+
 import axios from "../../axios";
-import { getColor, getFirst } from "../SidebarChat";
-import Timestamp from "react-timestamp";
+
 import { useStoreContext } from "../../utils/GlobalStore";
-import UserChat from "../UserChat";
-import AdminChat from "../AdminChat";
+
 import BothChat from "../BothChat";
-const admin = "admin@admin.com";
 
 function Chat() {
   //settign states
