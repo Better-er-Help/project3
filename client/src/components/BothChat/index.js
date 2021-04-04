@@ -34,6 +34,7 @@ function BothChat({ messages }) {
         timestamp: `${ATM}`,
         received: true,
         roomName: getCurrentChat(),
+        token: localStorage.getItem("token"),
       });
     } else {
       await axios.post("/messages/new", {
@@ -42,6 +43,7 @@ function BothChat({ messages }) {
         timestamp: `${ATM}`,
         received: false,
         roomName: `${name}`,
+        token: localStorage.getItem("token"),
       });
     }
 
