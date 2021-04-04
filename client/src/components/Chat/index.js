@@ -8,6 +8,7 @@ import axios from "../../axios";
 import { useStoreContext } from "../../utils/GlobalStore";
 
 import BothChat from "../BothChat";
+const admin = "admin@admin.com";
 
 function Chat() {
   //settign states

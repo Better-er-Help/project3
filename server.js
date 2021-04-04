@@ -27,6 +27,12 @@ app.use(express.static("./client/build"));
 // setting headers
 app.use(cors());
 
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Headers", "*");
+//   next();
+// });
+
 const connectionUrl =
   "mongodb+srv://admin:paws12345@cluster0.nlzcv.mongodb.net/paws?retryWrites=true&w=majority";
 
@@ -74,6 +80,7 @@ app.get("/", (req, res) => {
 
 app.get("/users/:name", (req, res) => {
   Users.findOne({ email: req.params.name }).then((data) => {
+    console.log("userdata: ", data);
     res.status(200).send(data);
   });
 });

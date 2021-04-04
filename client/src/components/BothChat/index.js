@@ -6,7 +6,7 @@ import {
   SearchOutlined,
 } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
-import { React, useState, useEffect } from "react";
+import { React, useState, setState, useEffect } from "react";
 import "./style.css";
 import Sidebar from "../Sidebar";
 import axios from "../../axios";
@@ -71,7 +71,12 @@ function BothChat({ messages }) {
     const firstLet = first[0];
     return firstLet;
   }
-
+  //
+  //   function getColor() {
+  //     const colors = ["blue", "red", "orange", "green", "purple", "pink"];
+  //     const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  //     return randomColor;
+  //   }
   if (name === "admin@admin.com") {
     return (
       <>
