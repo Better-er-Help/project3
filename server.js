@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const Messages = require("./models/dbMessages.js");
 const Pusher = require("pusher");
 const cors = require("cors");
-const auth = require('./api/auth')
+const auth = require("./api/auth");
 
 const PORT = process.env.PORT || 3001;
 
@@ -52,12 +52,13 @@ db.once("open", () => {
   changeStream.on("change", (change) => {
     console.log("a change occured: ", change);
 
-    if (change.operationType === "insert") {
+    if (change.operationType == "insert") {
       const messageDetails = change.fullDocument;
       pusher.trigger("messages", "inserted", {
-        name: messageDetails.user,
+        name: messageDetails.name,
         message: messageDetails.message,
         timestamp: messageDetails.timestamp,
+        roomName: messageDetails.roomName,
       });
     } else {
       console.log("error triggering pusher");
@@ -83,7 +84,15 @@ app.get("/messages", (req, res) => {
   });
 });
 
-app.post("/messages/new", auth, (req, res) => {
+app.get("/rooms", (req, res) => {
+  Messages.distinct("roomName").then((data) => {
+    console.log("here", data);
+    res.status(200).send(data);
+  });
+});
+
+app.post("/messages/new", (req, res) => {
+  console.log("server log: ", req.body);
   const dbMessage = req.body;
   Messages.create(dbMessage, (err, data) => {
     if (err) {

@@ -1,4 +1,5 @@
 import { Avatar, IconButton } from "@material-ui/core";
+import Pusher from "pusher-js";
 import {
   AttachFile,
   InsertEmoticon,
@@ -6,92 +7,63 @@ import {
   SearchOutlined,
 } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
-import { React, useState, setState } from "react";
+import { React, useState, useEffect, setState } from "react";
 import "./style.css";
 import Sidebar from "../Sidebar";
 import axios from "../../axios";
-import { useStoreContext } from "../../utils/GlobalStore"
+import { getColor, getFirst } from "../SidebarChat";
+import Timestamp from "react-timestamp";
+import { useStoreContext } from "../../utils/GlobalStore";
+import UserChat from "../UserChat";
+import AdminChat from "../AdminChat";
+import BothChat from "../BothChat";
+const admin = "admin@admin.com";
 
-function Chat({ messages }) {
-  const [input, setInput] = useState("");
-  const [{name, token}, dispatch] = useStoreContext()
+function Chat() {
+  //settign states
+  //const [admin, setAdmin] = useState("admin@admin.com");
+  const [messages, setMessages] = useState([]);
+  const [{ name, token }, dispatch] = useStoreContext();
 
-  function test(){
-    console.log({name,token})
-  }
+  //setting axios calls to get messages from db
+  useEffect(async () => {
+    const res = await axios.get("/messages");
+    setMessages(res.data);
+  }, []);
 
-  const sendMessage = async (e) => {
-    e.preventDefault();
-
-    await axios.post("/messages/new", {
-      message: input,
-      name: "demo",
-      timestamp: "just now!",
-      received: false,
-      roomName: "DanceRoom",
-      token: localStorage.getItem('token')
+  // this is the realtime mongo hookup.
+  useEffect(() => {
+    const pusher = new Pusher("19b49e3760d87d26f1b4", {
+      cluster: "us2",
     });
-    setInput("");
-  };
-  return (
-    <>
-    <button onClick={test}>testttt</button>
-      <Sidebar />
-      <div className="chat">
-        <div className="chatHeader">
-          <Avatar />
-          <div className="chatHeaderInfo">
-            <h3>Room name</h3>
-            <p>Last seens at ...</p>
-          </div>
-          <div className="chatHeaderRight">
-            <IconButton>
-              <SearchOutlined />
-            </IconButton>
-            <IconButton>
-              <AttachFile />
-            </IconButton>
-            <IconButton>
-              <MoreVert />
-            </IconButton>
-          </div>
-        </div>
+    const channel = pusher.subscribe("messages");
+    channel.bind("inserted", function (data) {
+      setMessages([...messages, data]);
+    });
+    //clean up function
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
+  }, [messages]);
 
-        <div className="chatBody">
-          {messages.map((message) => {
-            if (message.roomName == "DanceRoom") {
-              return (
-                <p
-                  className={`chatMessage ${
-                    message.received && "chatReceiver"
-                  }`}
-                >
-                  <span className="chatName">{message.name}</span>
-                  {message.message}
-                  <span className="chatTimestamp">{message.timestamp}</span>
-                </p>
-              );
-            }
-          })}
-        </div>
-        <div className="chatFooter">
-          <InsertEmoticon />
-          <form>
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type a message"
-              type="text"
-            />
-            <button onClick={sendMessage} type="submit">
-              Send Message
-            </button>
-          </form>
-          <MicIcon />
-        </div>
-      </div>
-    </>
-  );
+  // let chatMessages;
+
+  // if (name === admin) {
+  //   chatMessages = <AdminChat messages={messages} />;
+  // } else if (name !== admin) {
+  //   chatMessages = <UserChat messages={messages} />;
+  // }
+  return <BothChat messages={messages} />;
+
+  //   function() {
+  //     if (name === admin) {
+  //       return <AdminChat messages={messages} />;
+  //     } else {
+  //       return <UserChat messages={messages} />;
+  //     }
+  //   },
+  // };
 }
 
 export default Chat;

@@ -14,7 +14,7 @@ function Nav(props){
 
     return (
         <div className="ulContainer">
-            <ul style={{width: menu ? '250px' : '0'}}>
+            <ul style={{width: menu ? '250px' : null}}>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About Us</Link></li>
                 <li><Link to='/publicChat'>Chat</Link></li>
