@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Messages = require("./models/dbMessages.js");
+const Users = require("./models/user");
 const Pusher = require("pusher");
 const cors = require("cors");
 const auth = require("./api/auth");
@@ -77,22 +78,25 @@ app.get("/", (req, res) => {
   }
 });
 
+app.get("/users/:name", (req, res) => {
+  Users.findOne({ email: req.params.name }).then((data) => {
+    res.status(200).send(data);
+  });
+});
+
 app.get("/messages", (req, res) => {
   Messages.find({}).then((data) => {
-    console.log("data: ", data);
     res.status(200).send(data);
   });
 });
 
 app.get("/rooms", (req, res) => {
-  Messages.distinct("roomName").then((data) => {
-    console.log("here", data);
+  Users.distinct("email").then((data) => {
     res.status(200).send(data);
   });
 });
 
 app.post("/messages/new", (req, res) => {
-  console.log("server log: ", req.body);
   const dbMessage = req.body;
   Messages.create(dbMessage, (err, data) => {
     if (err) {

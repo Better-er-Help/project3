@@ -24,11 +24,17 @@ function Chat() {
   //const [admin, setAdmin] = useState("admin@admin.com");
   const [messages, setMessages] = useState([]);
   const [{ name, token }, dispatch] = useStoreContext();
+  const [color, setColor] = useState([]);
 
   //setting axios calls to get messages from db
   useEffect(async () => {
     const res = await axios.get("/messages");
     setMessages(res.data);
+  }, [name]);
+
+  useEffect(async () => {
+    const res = await axios.get(`/users/${name}`).then();
+    setColor(res.data.color);
   }, []);
 
   // this is the realtime mongo hookup.
@@ -54,7 +60,7 @@ function Chat() {
   // } else if (name !== admin) {
   //   chatMessages = <UserChat messages={messages} />;
   // }
-  return <BothChat messages={messages} />;
+  return <BothChat messages={messages} color={color} />;
 
   //   function() {
   //     if (name === admin) {
