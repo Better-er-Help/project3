@@ -10,10 +10,16 @@ import "./App.css";
 import axios from "./axios";
 import Chat from './components/Chat'
 import Sidebar from './components/SidebarChat'
+import { ToggleMain } from './utils/GlobalStore'
 
 function App() {
   //settign states
   const [messages, setMessages] = useState([]);
+  const [rightMarg, setRightMarg] = useState(false)
+
+  function toggleMenu(){
+    rightMarg === false ? setRightMarg(true) : setRightMarg(false)
+  }
 
   //setting axios calls to get messages from db
   useEffect(async () => {
@@ -45,10 +51,10 @@ function App() {
     <>
     <StoreProvider>
       <Router>
-        <Header><Section/></Header>
-        <div className="app">
-          <div className="appbody">
-            <Chat messages={messages}/>
+        <Header toggleMenu={toggleMenu}><Section/></Header>
+        <div className="app" style={{backgroundColor: rightMarg ? 'rgba(37, 150, 190, 0.4)' : 'rgb(37, 150, 190)'}}>
+          <div className="appbody" style={{marginRight: rightMarg ? '250px' : '0'}}>
+            {/* <Chat messages={messages}/> */}
             <Route exact path='/' component={Homepage}/>
             <Route exact path="/signup" component={Signup} />
           </div>
