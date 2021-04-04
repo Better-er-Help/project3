@@ -9,23 +9,31 @@ import Signup from "./components/Signup/signup";
 import Login from "./components/Login/login";
 import "./App.css";
 import axios from "./axios";
+
 import BothChat from "./components/BothChat";
+
+import Header from "./components/Header"
+import Section from "./components/Section"
+
 // import axios from "axios";
 
 function App() {
   return (
+    
     <>
-      <StoreProvider>
-        <Router>
-          <Login />
-          <div className="app">
-            <div className="appbody">
-              <Chat />
-              {/* <UserChat messages={messages} /> */}
-              {/* <Chat messages={messages} /> */}
-              {/* <Route exact path="/" component={Chat({ messages })} /> */}
-              <Route exact path="/signup" component={Signup} />
-            </div>
+
+    <StoreProvider>
+      <Router>
+      <Header>
+        <Section/>
+      </Header>
+        <Login />
+        <div className="app">
+          <div className="appbody">
+            <Chat />
+            {/* <Route exact path="/" component={Chat({ messages })} /> */}
+            <Route exact path="/signup" component={Signup} />
+
           </div>
         </Router>
       </StoreProvider>
