@@ -34,7 +34,7 @@ function BothChat({ messages }) {
         timestamp: `${ATM}`,
         received: true,
         roomName: getCurrentChat(),
-        token: localStorage.getItem('token')
+        token: localStorage.getItem("token"),
       });
     } else {
       await axios.post("/messages/new", {
@@ -43,7 +43,7 @@ function BothChat({ messages }) {
         timestamp: `${ATM}`,
         received: false,
         roomName: `${name}`,
-        token: localStorage.getItem('token')
+        token: localStorage.getItem("token"),
       });
     }
 
@@ -70,7 +70,7 @@ function BothChat({ messages }) {
     return (
       <>
         <Sidebar />
-        <div className="adminchat">
+        <div className="chat">
           <div className="chatHeader">
             <Avatar style={{ backgroundColor: getColor() }}>
               {getFirst({ name })}
@@ -94,17 +94,23 @@ function BothChat({ messages }) {
           <div className="chatBody">
             {messages.map((message) => {
               if (message.roomName === getCurrentChat()) {
-                return (
-                  <p
-                    className={`chatMessage ${
-                      message.received && "chatReceiver"
-                    }`}
-                  >
-                    <span className="chatName">{message.name}</span>
-                    {message.message}
-                    <span className="chatTimestamp">{message.timestamp}</span>
-                  </p>
-                );
+                if (message.name === "admin@admin.com") {
+                  return (
+                    <p className={`chatMessage chatReceiver`}>
+                      <span className="chatName">{message.name}</span>
+                      {message.message}
+                      <span className="chatTimestamp">{message.timestamp}</span>
+                    </p>
+                  );
+                } else {
+                  return (
+                    <p className="chatMessage">
+                      <span className="chatName">{message.name}</span>
+                      {message.message}
+                      <span className="chatTimestamp">{message.timestamp}</span>
+                    </p>
+                  );
+                }
               }
             })}
           </div>
@@ -153,17 +159,23 @@ function BothChat({ messages }) {
           <div className="chatBody">
             {messages.map((message) => {
               if (message.roomName === `${name}`) {
-                return (
-                  <p
-                    className={`chatMessage ${
-                      message.received && "chatReceiver"
-                    }`}
-                  >
-                    <span className="chatName">{message.name}</span>
-                    {message.message}
-                    <span className="chatTimestamp">{message.timestamp}</span>
-                  </p>
-                );
+                if (message.name === "admin@admin.com") {
+                  return (
+                    <p className={`chatMessage chatReceiver`}>
+                      <span className="chatName">{message.name}</span>
+                      {message.message}
+                      <span className="chatTimestamp">{message.timestamp}</span>
+                    </p>
+                  );
+                } else {
+                  return (
+                    <p className="chatMessage">
+                      <span className="chatName">{message.name}</span>
+                      {message.message}
+                      <span className="chatTimestamp">{message.timestamp}</span>
+                    </p>
+                  );
+                }
               }
             })}
           </div>
