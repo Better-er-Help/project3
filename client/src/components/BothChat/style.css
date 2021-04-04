@@ -1,20 +1,12 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-.chat {
+.adminchat {
   display: flex;
   flex-direction: column;
   flex: 0.7;
+}
+.userchat {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 .chatHeader {
   padding: 20px;
@@ -37,7 +29,7 @@ code {
 }
 .chatBody {
   flex: 1;
-  background-image: url("./components/imgs/pawsChatBG.png");
+  background-image: url("../imgs/pawsChatBG.png");
   background-repeat: repeat;
   /* background-position: center; */
   padding: 30px;
