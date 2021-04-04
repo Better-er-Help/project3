@@ -1,6 +1,7 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import "./style.css";
 import { Avatar } from "@material-ui/core";
+import axios from "../../axios";
 
 function SidebarChat({ addNewChat, name }) {
   function getFirst(name) {
@@ -24,15 +25,20 @@ function SidebarChat({ addNewChat, name }) {
     }
   };
   const [room, setRoom] = useState("");
+  const [color, setColor] = useState([]);
   const loadChat = () => {
     document.getElementById("currentChat").innerHTML = name;
     setRoom(name);
     console.log("updated chat", name);
   };
+  useEffect(async () => {
+    const res = await axios.get(`/users/${name}`).then();
+    setColor(res.data.color);
+  }, []);
 
   return !addNewChat ? (
     <div onClick={loadChat} className="sidebarChat">
-      <Avatar style={{ backgroundColor: "purple" }}>
+      <Avatar style={{ backgroundColor: `${color}` }}>
         {getFirst({ name })}
       </Avatar>
       <div className="sidebarChatInfo">
