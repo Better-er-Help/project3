@@ -22,6 +22,7 @@ function UserChat({ messages }) {
 
   const sendMessage = async (e) => {
     e.preventDefault();
+    console.log("weeeeeeeeeeee user", e.target.value);
 
     await axios.post("/messages/new", {
       message: input,
@@ -33,10 +34,6 @@ function UserChat({ messages }) {
     setInput("");
   };
 
-  function getCurrentChat() {
-    let thisChat = document.getElementById("currentChat").innerHTML;
-    return thisChat;
-  }
   // getting first letter of email for avatar
   function getFirst(name) {
     const first = name.name.split("");

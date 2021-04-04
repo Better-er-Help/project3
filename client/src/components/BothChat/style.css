@@ -1,7 +1,12 @@
-.chat {
+.adminchat {
   display: flex;
   flex-direction: column;
   flex: 0.7;
+}
+.userchat {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 .chatHeader {
   padding: 20px;

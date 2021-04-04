@@ -9,6 +9,7 @@ import Signup from "./components/Signup/signup";
 import Login from "./components/Login/login";
 import "./App.css";
 import axios from "./axios";
+import BothChat from "./components/BothChat";
 // import axios from "axios";
 
 function App() {

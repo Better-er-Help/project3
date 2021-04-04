@@ -26,7 +26,7 @@ function AdminChat({ messages }) {
 
   const sendMessage = async (e) => {
     e.preventDefault();
-
+    console.log("weeeeeeeeee admin", e.target.value);
     await axios.post("/messages/new", {
       message: input,
       name: `${name}`,

@@ -92,6 +92,7 @@ app.get("/rooms", (req, res) => {
 });
 
 app.post("/messages/new", (req, res) => {
+  console.log("server log: ", req.body);
   const dbMessage = req.body;
   Messages.create(dbMessage, (err, data) => {
     if (err) {
