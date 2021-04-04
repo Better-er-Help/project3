@@ -12,32 +12,28 @@ import axios from "./axios";
 
 import BothChat from "./components/BothChat";
 
-import Header from "./components/Header"
-import Section from "./components/Section"
+import Header from "./components/Header";
+import Section from "./components/Section";
 
 // import axios from "axios";
 
 function App() {
   return (
-    
-    <>
-
     <StoreProvider>
       <Router>
-      <Header>
-        <Section/>
-      </Header>
+        <Header>
+          <Section />
+        </Header>
         <Login />
         <div className="app">
           <div className="appbody">
             <Chat />
             {/* <Route exact path="/" component={Chat({ messages })} /> */}
             <Route exact path="/signup" component={Signup} />
-
           </div>
-        </Router>
-      </StoreProvider>
-    </>
+        </div>
+      </Router>
+    </StoreProvider>
   );
 }
 
