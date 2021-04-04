@@ -1,21 +1,12 @@
-import { Avatar, IconButton } from "@material-ui/core";
 import Pusher from "pusher-js";
-import {
-  AttachFile,
-  InsertEmoticon,
-  MoreVert,
-  SearchOutlined,
-} from "@material-ui/icons";
-import MicIcon from "@material-ui/icons/Mic";
-import { React, useState, useEffect, setState } from "react";
+
+import { React, useState, useEffect } from "react";
 import "./style.css";
-import Sidebar from "../Sidebar";
+
 import axios from "../../axios";
-import { getColor, getFirst } from "../SidebarChat";
-import Timestamp from "react-timestamp";
+
 import { useStoreContext } from "../../utils/GlobalStore";
-import UserChat from "../UserChat";
-import AdminChat from "../AdminChat";
+
 import BothChat from "../BothChat";
 const admin = "admin@admin.com";
 
@@ -24,11 +15,17 @@ function Chat() {
   //const [admin, setAdmin] = useState("admin@admin.com");
   const [messages, setMessages] = useState([]);
   const [{ name, token }, dispatch] = useStoreContext();
+  const [color, setColor] = useState([]);
 
   //setting axios calls to get messages from db
   useEffect(async () => {
     const res = await axios.get("/messages");
     setMessages(res.data);
+  }, [name]);
+
+  useEffect(async () => {
+    const res = await axios.get(`/users/${name}`).then();
+    setColor(res.data.color);
   }, []);
 
   // this is the realtime mongo hookup.
@@ -54,7 +51,7 @@ function Chat() {
   // } else if (name !== admin) {
   //   chatMessages = <UserChat messages={messages} />;
   // }
-  return <BothChat messages={messages} />;
+  return <BothChat messages={messages} color={color} />;
 
   //   function() {
   //     if (name === admin) {

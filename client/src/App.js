@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { useState } from "react";
+
+
 import { StoreProvider } from "./utils/GlobalStore";
-import Homepage from './pages/Homepage'
-import Signup from './components/Signup/signup'
-import Header from './components/Header'
-import Section from './components/Section'
+
 import Chat from "./components/Chat";
+
+import Signup from "./components/Signup/signup";
+import Login from "./components/Login/login";
 import "./App.css";
 
 

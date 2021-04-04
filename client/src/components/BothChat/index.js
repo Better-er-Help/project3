@@ -6,23 +6,34 @@ import {
   SearchOutlined,
 } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
-import { React, useState, setState } from "react";
+import { React, useState, setState, useEffect } from "react";
 import "./style.css";
 import Sidebar from "../Sidebar";
 import axios from "../../axios";
-import { getColor, getFirst } from "../SidebarChat";
-import Timestamp from "react-timestamp";
+
 import { useStoreContext } from "../../utils/GlobalStore";
-import UserChat from "../UserChat";
+
 const admin = "admin@admin.com";
+const adminColor = "purple";
 
 function BothChat({ messages }) {
+  const [color, setColor] = useState([]);
+
+  //setting axios calls to get messages from db
+
   const [input, setInput] = useState("");
   const [{ name, token }, dispatch] = useStoreContext();
 
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
   const ATM = today.toUTCString();
+
+  useEffect(async () => {
+    const res = await axios.get(`/users/${name}`).then();
+    setColor(res.data.color);
+  }, []);
+
+  console.log("color: ", color);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -61,18 +72,18 @@ function BothChat({ messages }) {
     return firstLet;
   }
   //
-  function getColor() {
-    const colors = ["blue", "red", "orange", "green", "purple", "pink"];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    return randomColor;
-  }
+  //   function getColor() {
+  //     const colors = ["blue", "red", "orange", "green", "purple", "pink"];
+  //     const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  //     return randomColor;
+  //   }
   if (name === "admin@admin.com") {
     return (
       <>
         <Sidebar />
         <div className="chat">
           <div className="chatHeader">
-            <Avatar style={{ backgroundColor: getColor() }}>
+            <Avatar style={{ backgroundColor: adminColor }}>
               {getFirst({ name })}
             </Avatar>
             <div className="chatHeaderInfo">
@@ -137,7 +148,7 @@ function BothChat({ messages }) {
       <>
         <div className="userchat">
           <div className="chatHeader">
-            <Avatar style={{ backgroundColor: getColor() }}>
+            <Avatar style={{ backgroundColor: `${color}` }}>
               {getFirst({ name })}
             </Avatar>
             <div className="chatHeaderInfo">
