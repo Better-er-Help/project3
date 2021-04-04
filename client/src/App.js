@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { StoreProvider } from "./utils/GlobalStore"
 import Pusher from "pusher-js";
-import Chat from "./components/Chat";
-import Signup from "./components/Signup/signup";
-import Login from "./components/Login/login";
+import Homepage from './pages/Homepage'
+import Signup from './components/Signup/signup'
+import Header from './components/Header'
+import Section from './components/Section'
 import "./App.css";
 import axios from "./axios";
-import Header from "./components/Header"
-import Section from "./components/Section"
-// import axios from "axios";
+import Chat from './components/Chat'
+import Sidebar from './components/SidebarChat'
 
 function App() {
   //settign states
@@ -45,19 +45,16 @@ function App() {
     <>
     <StoreProvider>
       <Router>
-      <Header>
-        <Section/>
-      </Header>
-        <Login />
+        <Header><Section/></Header>
         <div className="app">
           <div className="appbody">
-            <Chat messages={messages} />
-            {/* <Route exact path="/" component={Chat({ messages })} /> */}
+            <Chat messages={messages}/>
+            <Route exact path='/' component={Homepage}/>
             <Route exact path="/signup" component={Signup} />
           </div>
         </div>
       </Router>
-      </StoreProvider>
+    </StoreProvider>
     </>
   );
 }

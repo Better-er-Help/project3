@@ -11,7 +11,7 @@
   background-color: lightgray;
   margin-top: -50px;
   height: 90vh;
-  width: 90vh;
+  width: 90%;
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
 }
 * {
@@ -46,7 +46,7 @@ header .logo{
 }
 header ul{
   list-style: none;
-  margin-right: 50px;
+  margin: 0 10px 0 0
 }
 header ul li{
   display: inline-block;
@@ -54,7 +54,6 @@ header ul li{
 header ul li a{
   text-decoration: none;
   color: whitesmoke;
-  text-transform: uppercase;
   opacity: 0.6;
   padding: 0 15px;
 }

@@ -29,6 +29,7 @@ function Chat({ messages }) {
       timestamp: "just now!",
       received: false,
       roomName: "DanceRoom",
+      token: localStorage.getItem('token')
     });
     setInput("");
   };
