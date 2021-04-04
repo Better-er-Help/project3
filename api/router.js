@@ -24,7 +24,8 @@ router.post('/signup', (req,res) => {
                   const user = new User({
                       _id: mongoose.Types.ObjectId(),
                       email: req.body.email,
-                      password: hash
+                      password: hash,
+                      color: req.body.color
                   })
                   user
                       .save()
