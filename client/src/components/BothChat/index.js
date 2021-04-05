@@ -45,7 +45,7 @@ function BothChat({ messages }) {
         received: true,
         roomName: getCurrentChat(),
         token: localStorage.getItem("token"),
-        auth: false
+        auth: 'false'
       });
     } else if(name !== '' && name !== admin){
       await axios.post("/messages/auth", {
@@ -55,7 +55,7 @@ function BothChat({ messages }) {
         received: true,
         roomName: getCurrentChat(),
         token: localStorage.getItem("token"),
-        auth: true
+        auth: 'true'
       });
     } else {
       await axios.post("/messages/new", {
@@ -65,7 +65,7 @@ function BothChat({ messages }) {
         received: false,
         roomName: `${name}`,
         token: localStorage.getItem("token"),
-        auth: false
+        auth: 'false'
       });
     }
 
@@ -88,6 +88,7 @@ function BothChat({ messages }) {
   //     const randomColor = colors[Math.floor(Math.random() * colors.length)];
   //     return randomColor;
   //   }
+
 
   if (name === "admin@admin.com") {
     return (
@@ -180,7 +181,7 @@ function BothChat({ messages }) {
 
           <div className="chatBody">
             {messages.map((message) => {
-              if (message.roomName === `${name}` || "welcome") {
+              if (message.roomName === `${name}`) {
                 if (message.name === "admin@admin.com") {
                   return (
                     <p className={`chatMessage chatReceiver`}>
@@ -189,7 +190,7 @@ function BothChat({ messages }) {
                       <span className="chatTimestamp">{message.timestamp}</span>
                     </p>
                   );
-                } else {
+                } else if (message.auth === true) {
                   return (
                     <p className="chatMessage">
                       <span className="chatName">{message.name}</span>
@@ -197,9 +198,15 @@ function BothChat({ messages }) {
                       <span className="chatTimestamp">{message.timestamp}</span>
                     </p>
                   );
-                }
-              }
-            })}
+                } else { 
+                 return (
+                <p className="chatMessage">
+                      <span className="chatName">{message.name}</span>
+                      {message.message}
+                      <span className="chatTimestamp">{message.timestamp}</span>
+                    </p>
+              )}
+            }})}
           </div>
           <div className="chatFooter">
             <InsertEmoticon />

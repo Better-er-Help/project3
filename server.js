@@ -88,8 +88,8 @@ app.get("/messages/public", (req, res) => {
   });
 });
 
-app.get(("/messages/auth"), auth, (req, res) => {
-  Messages.find({auth:true}).then((data) => {
+app.get(("/messages/auth"), (req, res) => {
+  Messages.find({}).then((data) => {
     res.status(200).send(data);
   });
 });

@@ -7,6 +7,7 @@ const messageSchema = new Schema({
   timestamp: String,
   received: Boolean,
   roomName: String,
+  auth: {type:Boolean}
 });
 
 module.exports = mongoose.model("messagecontents", messageSchema);

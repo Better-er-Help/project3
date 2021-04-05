@@ -21,4 +21,6 @@
 
 .sidebarChatInfo {
   margin-left: 15px;
+  overflow-y: hidden; 
+  overflow-x: hidden; 
 }
