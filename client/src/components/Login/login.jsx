@@ -24,9 +24,8 @@ function LoginForm(){
   }
 
   function logout(){
-    localStorage.removeItem('email')
-    localStorage.removeItem('token')
     setLog(false)
+    dispatch({type:"USER_LOGOUT"})
   }
 
   useEffect(function(){
