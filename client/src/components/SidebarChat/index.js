@@ -37,12 +37,14 @@ function SidebarChat({ addNewChat, name }) {
   }, []);
 
   return !addNewChat ? (
-    <div onClick={loadChat} className="sidebarChat">
-      <Avatar style={{ backgroundColor: `${color}` }}>
-        {getFirst({ name })}
-      </Avatar>
-      <div className="sidebarChatInfo">
-        <h2>{name}</h2>
+    <div>
+      <div onClick={loadChat} className="sidebarChat">
+        <Avatar style={{ backgroundColor: `${color}` }}>
+          {getFirst({ name })}
+        </Avatar>
+        <div className="sidebarChatInfo">
+          <h3>{name}</h3>
+        </div>
       </div>
     </div>
   ) : (

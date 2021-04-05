@@ -1,5 +1,4 @@
 .sidebarChat {
-  justify-content: center;
   flex-direction: column;
   flex: 1;
   padding: 20px;
@@ -8,12 +7,16 @@
   border-bottom: 1px solid gray;
   overflow: scroll;
 }
+
 .sidebarChat:hover {
   background-color: #ebebeb;
 }
-.sidebarChatInfo > h2 {
+
+.sidebarChatInfo > h3 {
   font-size: 16px;
   margin-bottom: 8px;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebarChatInfo {
