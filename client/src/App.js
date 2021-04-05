@@ -5,11 +5,11 @@ import { StoreProvider } from "./utils/GlobalStore";
 import Chat from "./components/Chat";
 
 import Signup from "./components/Signup/signup";
-import Login from "./components/Login/login";
 import { React, useState } from "react";
 import Header from "./components/Header";
 import Section from "./components/Section.js";
 import Homepage from "./pages/Homepage";
+import AidSelection from './pages/AidSelection'
 import "./App.css";
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
             style={{ marginRight: rightMarg ? "250px" : "0" }}
           >
             <Route exact path="/" component={Homepage} />
+            <Route exact path="/selection" component={AidSelection}/>
             <Route exact path="/publicChat" component={Chat} />
             <Route exact path="/signup" component={Signup} />
           </div>

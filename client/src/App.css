@@ -2,14 +2,14 @@
   margin: 0;
   display: grid;
   place-items: center;
-  height: 100vh;
+  height: 100%;
   transition: 0.3s
 }
 
 .appbody {
   display: flex;
   background-color: lightgray;
-  margin-top: 70px;
+  margin: 80px 0 15px 0;
   height: 90vh;
   width: 90%;
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);

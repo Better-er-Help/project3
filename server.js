@@ -97,7 +97,7 @@ app.get("/rooms", (req, res) => {
   });
 });
 
-app.post("/messages/new", auth, (req, res) => {
+app.post("/messages/new", (req, res) => {
   const dbMessage = req.body;
   Messages.create(dbMessage, (err, data) => {
     if (err) {
