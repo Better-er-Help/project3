@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react'
 import './login.css'
 import { useStoreContext } from "../../utils/GlobalStore"
@@ -6,19 +6,39 @@ import { useStoreContext } from "../../utils/GlobalStore"
 function LoginForm(){
 
   const [{name, token}, dispatch] = useStoreContext()
-
+  const [showModal, setShowModal] = useState(false)
+  const [authFail, setAuthFail] = useState(false)
+  const [log, setLog] = useState(false)
+  const userRef = useRef()
+  const passRef = useRef()
+  let history = useHistory()
   let pcUser = ''
+
+
+  function toggleModal(){
+    setShowModal(true)
+  }
+
+  function dismissModal (){
+    setShowModal(false)
+  }
+
+  function logout(){
+    localStorage.removeItem('email')
+    localStorage.removeItem('token')
+    setLog(false)
+  }
 
   useEffect(function(){
     if (localStorage.getItem("email") !== null) {
-      pcUser = localStorage.getItem("email")}
+      pcUser = localStorage.getItem("email")
+      setLog(true)
+      }
     if(pcUser !== ''){
       dispatch({ type: 'ALREADY_SIGNEDIN', data: {name:pcUser}})
     }
   }, [])
 
-  const userRef = useRef()
-  const passRef = useRef()
 
   async function login(e){
     e.preventDefault()
@@ -34,36 +54,43 @@ function LoginForm(){
       }
       fetchOptions.body = JSON.stringify(data)
     
-    const {token, email} = await fetch('/login', fetchOptions).then(r=>r.json())
+    const {token, email, message} = await fetch('/login', fetchOptions).then(r=>r.json())
+    console.log(message)
 
-    localStorage.token = token
-    localStorage.email = email
-    pcUser = email
-
-    dispatch({ type: 'USER_LOGIN', data: {name:email, token: token }})
-  }
-
-  const [showModal, setShowModal] = useState(false)
-
-  function toggleModal(){
-    setShowModal(true)
-  }
-
-  function dismissModal (){
-    setShowModal(false)
+    if (message === 'Auth successful') {
+      localStorage.token = token
+      localStorage.email = email
+      pcUser = email
+      dispatch({ type: 'USER_LOGIN', data: {name:email, token: token }})
+      history.push('/publicChat')
+      dismissModal()
+      setLog(true)
+    } else if ( message === 'No such being!') {
+      passRef.current.value = ''
+      setAuthFail(true)
+    }
   }
 
     return (
         <>
-
-          <button type="button" className="btn btn-dark" onClick={toggleModal}>
-                    Log in
+        {log ? <button type="button" className="btn btn-dark" onClick={logout}>
+                    Logout
           </button>
+          :
+          <div className="logdiv">
+            <Link to='/signup' className="btn btn-dark newUser">New user</Link>
+            <button type="button" className="btn btn-dark" onClick={toggleModal}>
+                      Log in
+            </button> 
+          </div>
+          }
+          
 
         <div className="modalSign" style={{display: showModal === true ? 'block' : 'none'}}>
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">Log in</h5>
+                <h6 className="authFail" style={{display: authFail ? 'block' : 'none'}}>Wrong username or password</h6>
                 <button className="btn closeModal" onClick={dismissModal}>&times;</button>
               </div>
               <div className="modalBody">

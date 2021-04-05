@@ -53,7 +53,7 @@ router.post('/login', (req,res) => {
   .then(user => {
       if (user.length < 1) {
           return res.status(401).json({
-              message: 'Auth failed'
+              message: 'No such being!'
           })
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result)=> {

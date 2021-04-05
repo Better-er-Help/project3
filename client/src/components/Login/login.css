@@ -81,3 +81,31 @@ color: rgb(85, 85, 85);
 text-decoration: none;
 cursor: pointer;
 }
+
+.authFail {
+    color: red
+}
+
+.logdiv {
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+@media (max-width: 780px){
+    .logdiv{
+        margin-top:10px;
+    }
+}
+
+.newUser {
+    border: 3px solid rgba(37, 150, 190, 1);
+    opacity: 1;
+    background: none;
+}
+
+.newUser:hover {
+    border: 3px solid rgba(37,150,190,.6);
+    background: none;
+    padding-bottom: .375rem;
+}

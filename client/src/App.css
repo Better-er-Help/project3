@@ -42,9 +42,11 @@ header{
   transition: 0.3s
 }
 header .logo{
-  margin-left: 50px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  margin-left: 20px;
+  width: 30px;
+}
+header img {
+  width: 100%
 }
 header ul{
   list-style: none;
@@ -56,11 +58,22 @@ header ul li{
 header ul li a{
   text-decoration: none;
   color: whitesmoke;
-  opacity: 0.6;
   padding: 0 15px;
 }
+
 header ul li a:hover{
-  opacity: 1;
+  color: whitesmoke;
+  border-left: 3px solid rgba(37, 150, 190, 1)
+}
+
+@media (min-width: 781px){
+  header ul li a:hover{
+    opacity: .8;
+    padding-bottom: 15px;
+    border-bottom: 3px solid rgba(37, 150, 190, 1);
+    border-left: none;
+    color: whitesmoke;
+  }
 }
 header .menu,
 header .close{
@@ -77,6 +90,16 @@ header .close{
   height: max-content
 }
 
+header .menu {
+  margin-top: 3px;
+}
+
+header .close{
+  height: 46px;
+  line-height: normal;
+  padding: 5px 15px;
+}
+
 section{
   min-height: 100vh;
   background: lightskyblue;
@@ -89,16 +112,8 @@ section h2{
   color: #444;
   font-size: 2.5rem;
 }
-@media (max-width: 750px){
-  header .logo,
-  header ul{
-    margin: 0;
-    width: 100%;
-    line-height: 24px;
-  }
-}
 
-@media (max-width: 500px){
+@media (max-width: 780px){
   header ul{
     height: 100%;
     width: 0;
@@ -122,14 +137,20 @@ section h2{
     color: #818181;
     transition: 0.3s;
   }
+  header ul li Link:hover{
+    opacity: .8;
+    padding-left: 15px;
+ }
   header .menu,
   header .close{
     display: block;
   }
+
   header .logo{
-    width: initial;
-    margin-left: 20px;
-    line-height: 70px;
+    width: 30px;
+  }
+  header img {
+    width: 100%
   }
   section h2{
     font-size: 1.4rem;
