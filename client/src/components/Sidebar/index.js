@@ -47,7 +47,9 @@ function Sidebar({ addNewChat }) {
         <SidebarChat addNewChat />
         {/* <button onClick={log}>here </button>; */}
         {rooms.map((room) => {
-          return <SidebarChat name={room} onClick={loadChat(room)} />;
+          return (
+            <SidebarChat name={room} onClick={loadChat(room)} key={room} />
+          );
         })}
       </div>
     </div>

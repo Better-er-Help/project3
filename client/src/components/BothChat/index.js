@@ -119,7 +119,7 @@ function BothChat({ messages }) {
               if (message.roomName === getCurrentChat()) {
                 if (message.name === "admin@admin.com") {
                   return (
-                    <p className={`chatMessage chatReceiver`}>
+                    <p className={`chatMessage chatReceiver`} key={message._id}>
                       <span className="chatName">{message.name}</span>
                       {message.message}
                       <span className="chatTimestamp">{message.timestamp}</span>
@@ -127,7 +127,7 @@ function BothChat({ messages }) {
                   );
                 } else {
                   return (
-                    <p className="chatMessage">
+                    <p className="chatMessage" key={message._id}>
                       <span className="chatName">{message.name}</span>
                       {message.message}
                       <span className="chatTimestamp">{message.timestamp}</span>
@@ -184,7 +184,7 @@ function BothChat({ messages }) {
               if (message.roomName === `${name}`) {
                 if (message.name === "admin@admin.com") {
                   return (
-                    <p className={`chatMessage chatReceiver`}>
+                    <p className={`chatMessage chatReceiver`} key={message._id}>
                       <span className="chatName">{message.name}</span>
                       {message.message}
                       <span className="chatTimestamp">{message.timestamp}</span>
