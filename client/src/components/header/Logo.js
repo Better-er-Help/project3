@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import paws from '../imgs/paws.jpg'
 
 export class Logo extends Component {
     render() {
+
         return (
             <div className="logo">
-                <h1>P.A.W.S</h1>
+                <Link to='/'><img src={paws} alt="logo"/></Link>
             </div>
         )
     }
