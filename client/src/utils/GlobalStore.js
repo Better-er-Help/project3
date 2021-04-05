@@ -14,8 +14,9 @@ const dataReducer = (state, action) => {
       return { ...state, ...action.data, alert: action.message || '', authOk: true }
     case "USER_LOGOUT":
       // needed to force this reload (else it just refreshed with invalid content)
-      delete localStorage.session
-      window.location.href = '/login'
+      localStorage.removeItem('email')
+      localStorage.removeItem('token')
+      window.location.href = '/'
       return { ...initialData, alert: action.message || '' }
     case "ALERT_MESSAGE":
       return { ...state, alert: action.message }
