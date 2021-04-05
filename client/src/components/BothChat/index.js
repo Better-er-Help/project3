@@ -34,8 +34,6 @@ function BothChat({ messages }) {
     setColor(res.data.color);
   }, []);
 
-  console.log("color: ", color);
-
   const sendMessage = async (e) => {
     e.preventDefault();
 
@@ -182,7 +180,7 @@ function BothChat({ messages }) {
 
           <div className="chatBody">
             {messages.map((message) => {
-              if (message.roomName === `${name}`) {
+              if (message.roomName === `${name}` || "welcome") {
                 if (message.name === "admin@admin.com") {
                   return (
                     <p className={`chatMessage chatReceiver`}>
