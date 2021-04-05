@@ -6,7 +6,7 @@ import {
   SearchOutlined,
 } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
-import { React, useState, setState, useEffect } from "react";
+import { React, useState, setState, useEffect, useRef } from "react";
 import "./style.css";
 import Sidebar from "../Sidebar";
 import axios from "../../axios";
@@ -23,6 +23,7 @@ function BothChat({ messages }) {
 
   const [input, setInput] = useState("");
   const [{ name, token }, dispatch] = useStoreContext();
+  const nameRef = useRef()
 
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
@@ -46,6 +47,17 @@ function BothChat({ messages }) {
         received: true,
         roomName: getCurrentChat(),
         token: localStorage.getItem("token"),
+        auth: false
+      });
+    } else if(name !== '' && name !== admin){
+      await axios.post("/messages/auth", {
+        message: input,
+        name: `${name}`,
+        timestamp: `${ATM}`,
+        received: true,
+        roomName: getCurrentChat(),
+        token: localStorage.getItem("token"),
+        auth: true
       });
     } else {
       await axios.post("/messages/new", {
@@ -55,6 +67,7 @@ function BothChat({ messages }) {
         received: false,
         roomName: `${name}`,
         token: localStorage.getItem("token"),
+        auth: false
       });
     }
 
@@ -62,7 +75,7 @@ function BothChat({ messages }) {
   };
 
   function getCurrentChat() {
-    let thisChat = document.getElementById("currentChat").innerHTML;
+    let thisChat = nameRef.current.innerHTML
     return thisChat;
   }
   // getting first letter of email for avatar
@@ -77,6 +90,7 @@ function BothChat({ messages }) {
   //     const randomColor = colors[Math.floor(Math.random() * colors.length)];
   //     return randomColor;
   //   }
+
   if (name === "admin@admin.com") {
     return (
       <>
@@ -87,7 +101,7 @@ function BothChat({ messages }) {
               {getFirst({ name })}
             </Avatar>
             <div className="chatHeaderInfo">
-              <h3 id="currentChat">{name}</h3>
+              <h3 id="currentChat" ref={nameRef}>{name}</h3>
             </div>
             <div className="chatHeaderRight">
               <IconButton>
@@ -101,7 +115,6 @@ function BothChat({ messages }) {
               </IconButton>
             </div>
           </div>
-
           <div className="chatBody">
             {messages.map((message) => {
               if (message.roomName === getCurrentChat()) {
@@ -206,6 +219,7 @@ function BothChat({ messages }) {
             <MicIcon />
           </div>
         </div>
+        <div style={{display:'none'}} ref={nameRef}>{name}</div>
       </>
     );
   }
