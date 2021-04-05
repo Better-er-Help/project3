@@ -51,8 +51,6 @@ db.once("open", () => {
   const changeStream = msgCollection.watch();
 
   changeStream.on("change", (change) => {
-    console.log("a change occured: ", change);
-
     if (change.operationType == "insert") {
       const messageDetails = change.fullDocument;
       pusher.trigger("messages", "inserted", {
@@ -80,7 +78,6 @@ app.get("/", (req, res) => {
 
 app.get("/users/:name", (req, res) => {
   Users.findOne({ email: req.params.name }).then((data) => {
-    console.log("userdata: ", data);
     res.status(200).send(data);
   });
 });
