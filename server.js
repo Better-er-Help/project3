@@ -82,7 +82,13 @@ app.get("/users/:name", (req, res) => {
   });
 });
 
-app.get("/messages", (req, res) => {
+app.get("/messages/public", (req, res) => {
+  Messages.find({}).then((data) => {
+    res.status(200).send(data);
+  });
+});
+
+app.get(("/messages/auth"), (req, res) => {
   Messages.find({}).then((data) => {
     res.status(200).send(data);
   });
@@ -104,6 +110,18 @@ app.post("/messages/new", (req, res) => {
     }
   });
 });
+
+app.post("/messages/auth", auth, (req, res) => {
+  const dbMessage = req.body;
+  Messages.create(dbMessage, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(`new message created: \n ${data}`);
+    }
+  });
+});
+
 
 // app.get("*", (req, res) => {
 //   console.log("[HTML GET]: Get React app");

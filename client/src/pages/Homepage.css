@@ -1,6 +1,5 @@
 .holder {
     height: 400px;
-    width: max-content;
     display: flex;
     gap: 40px;
     flex-wrap: wrap;

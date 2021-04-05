@@ -14,13 +14,16 @@ function Chat() {
   //settign states
   //const [admin, setAdmin] = useState("admin@admin.com");
   const [messages, setMessages] = useState([]);
+  const [authedMessages, setAuthedMessages] = useState([])
   const [{ name, token }, dispatch] = useStoreContext();
   const [color, setColor] = useState([]);
 
   //setting axios calls to get messages from db
   useEffect(async () => {
-    const res = await axios.get("/messages");
+    const res = await axios.get("/messages/public");
+    // const authed = await axios.get("/messages/auth")
     setMessages(res.data);
+    // setAuthedMessages(authed.data)
   }, [name]);
 
   useEffect(async () => {
@@ -36,6 +39,7 @@ function Chat() {
     const channel = pusher.subscribe("messages");
     channel.bind("inserted", function (data) {
       setMessages([...messages, data]);
+      setAuthedMessages([...authedMessages, data])
     });
     //clean up function
     return () => {
