@@ -33,8 +33,6 @@ function BothChat({ messages }) {
     setColor(res.data.color);
   }, []);
 
-  console.log("color: ", color);
-
   const sendMessage = async (e) => {
     e.preventDefault();
 

@@ -29,7 +29,6 @@ function SidebarChat({ addNewChat, name }) {
   const loadChat = () => {
     document.getElementById("currentChat").innerHTML = name;
     setRoom(name);
-    console.log("updated chat", name);
   };
   useEffect(async () => {
     const res = await axios.get(`/users/${name}`).then();
