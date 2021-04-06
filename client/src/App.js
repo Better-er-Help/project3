@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import Chat from "./components/Chat";
-
+import About from './pages/aboutme'
 import Signup from "./components/Signup/signup";
 import { React, useState } from "react";
 import Header from "./components/Header";
@@ -48,6 +48,7 @@ function App() {
             style={{ marginRight: rightMarg ? "250px" : "0" }}
           >
             <Route exact path="/" component={Homepage} />
+            <Route exact path="/about" component={About}/>
             <Route exact path="/selection" component={AidSelection}/>
             <Route exact path="/chatselection" component={ChatSelection}/>
             <Route exact path="/publicChat" component={Chat2}/>

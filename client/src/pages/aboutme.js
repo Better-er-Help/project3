@@ -1,3 +1,5 @@
+import imgFile from '../components/imgs/AwesomeFace.png'
+
 function Aboutme() {
     return (
         <div className="container bg-gray">
@@ -42,7 +44,7 @@ function Aboutme() {
                                     <div className="col-sm-10-offset-1 center mtop20">
                                         <div className="col-sm-4">
                                             <div className="success-story">
-                                                <img src="insert image">
+                                                <img src={imgFile} />
                                                     "The biggest achievement Ive made is, truly,fighting for myself.
                                                     Through working with Aiko and taking the time to discuss various issues with her, Ive become
                                                     become a bigger advocate for myself, and im so proud of that."
@@ -53,11 +55,11 @@ function Aboutme() {
                                                         </div>
                                             </div>
                                             <div className="success-story">
-                                                <img src="insert img link">
+                                                {/* <img src="insert img link">
                                                     "I have now been working with Sheilah on BetterHelp fo abou 4 weeks, and can confidently say that
                                                     I am a lot less anxious about my career path now than when I first signed up...I am
                                                     so much better off now than I was before."
-                                                            </img>
+                                                            </img> */}
 
                                                 <div>
                                                     <a href="insert link here"></a>
@@ -67,11 +69,11 @@ function Aboutme() {
 
                                         <div className="col-sm-4">
                                             <div className="success-story">
-                                                <img src="insert img">
+                                                {/* <img src="insert img">
                                                     "I am a totally different person now than when I signed up 19 months ago. I have found my
                                                     my voice and can speak up for myself now....My confidence level is also better than it has
                                                     ever been."
-                                                                        </img>
+                                                                        </img> */}
 
                                                 <div>
                                                     <a href="insert link here">Read more</a>
@@ -94,20 +96,6 @@ function Aboutme() {
 
                 </div>
             </div>
-
-
-
-        </div>
-                                        </div >
-                                    </div >
-                                </div >
-                            </div >
-                        </div >
-                    </div >
-                    
-            </div >
-        </div >
-
     )
 }
 export default Aboutme
