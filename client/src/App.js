@@ -7,7 +7,8 @@ import { React, useState } from "react";
 import Header from "./components/Header";
 import Section from "./components/Section.js";
 import Homepage from "./pages/Homepage";
-import AidSelection from "./pages/AidSelection";
+import AidSelection from './pages/AidSelection'
+import Map from "./components/map"
 import ChatSelection from "./pages/ChatSelection";
 import Chat2 from "./components/Chat2";
 import "./App.css";
@@ -46,7 +47,7 @@ function App() {
           style={{ marginRight: rightMarg ? "250px" : "0" }}
         >
             <Route exact path="/" component={Homepage} />
-            <Route exact path="/about" component={About}/>
+            <Route exact path="/physical" component={Map} />
             <Route exact path="/selection" component={AidSelection}/>
             <Route exact path="/chatselection" component={ChatSelection}/>
             <Route exact path="/publicChat" component={Chat2}/>
