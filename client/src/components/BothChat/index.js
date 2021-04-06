@@ -23,7 +23,7 @@ function BothChat({ messages }) {
 
   const [input, setInput] = useState("");
   const [{ name, token }, dispatch] = useStoreContext();
-  const nameRef = useRef()
+  const nameRef = useRef();
 
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
@@ -45,9 +45,9 @@ function BothChat({ messages }) {
         received: true,
         roomName: getCurrentChat(),
         token: localStorage.getItem("token"),
-        auth: 'false'
+        auth: "false",
       });
-    } else if(name !== '' && name !== admin){
+    } else if (name !== "" && name !== admin) {
       await axios.post("/messages/auth", {
         message: input,
         name: `${name}`,
@@ -55,7 +55,7 @@ function BothChat({ messages }) {
         received: true,
         roomName: getCurrentChat(),
         token: localStorage.getItem("token"),
-        auth: 'true'
+        auth: "true",
       });
     } else {
       await axios.post("/messages/new", {
@@ -65,7 +65,7 @@ function BothChat({ messages }) {
         received: false,
         roomName: `${name}`,
         token: localStorage.getItem("token"),
-        auth: 'false'
+        auth: "false",
       });
     }
 
@@ -73,7 +73,7 @@ function BothChat({ messages }) {
   };
 
   function getCurrentChat() {
-    let thisChat = nameRef.current.innerHTML
+    let thisChat = nameRef.current.innerHTML;
     return thisChat;
   }
   // getting first letter of email for avatar
@@ -89,7 +89,6 @@ function BothChat({ messages }) {
   //     return randomColor;
   //   }
 
-
   if (name === "admin@admin.com") {
     return (
       <>
@@ -100,7 +99,9 @@ function BothChat({ messages }) {
               {getFirst({ name })}
             </Avatar>
             <div className="chatHeaderInfo">
-              <h3 id="currentChat" ref={nameRef}>{name}</h3>
+              <h3 id="currentChat" ref={nameRef}>
+                {name}
+              </h3>
             </div>
             <div className="chatHeaderRight">
               <IconButton>
@@ -184,7 +185,7 @@ function BothChat({ messages }) {
               if (message.roomName === `${name}`) {
                 if (message.name === "admin@admin.com") {
                   return (
-                    <p className={`chatMessage chatReceiver`} key={message._id}>
+                    <p className={`chatMessage `} key={message._id}>
                       <span className="chatName">{message.name}</span>
                       {message.message}
                       <span className="chatTimestamp">{message.timestamp}</span>
@@ -192,21 +193,23 @@ function BothChat({ messages }) {
                   );
                 } else if (message.auth === true) {
                   return (
-                    <p className="chatMessage">
+                    <p className={`chatMessage chatReceiver`}>
                       <span className="chatName">{message.name}</span>
                       {message.message}
                       <span className="chatTimestamp">{message.timestamp}</span>
                     </p>
                   );
-                } else { 
-                 return (
-                <p className="chatMessage">
+                } else {
+                  return (
+                    <p className={`chatMessage chatReceiver`}>
                       <span className="chatName">{message.name}</span>
                       {message.message}
                       <span className="chatTimestamp">{message.timestamp}</span>
                     </p>
-              )}
-            }})}
+                  );
+                }
+              }
+            })}
           </div>
           <div className="chatFooter">
             <InsertEmoticon />
@@ -224,7 +227,9 @@ function BothChat({ messages }) {
             <MicIcon />
           </div>
         </div>
-        <div style={{display:'none'}} ref={nameRef}>{name}</div>
+        <div style={{ display: "none" }} ref={nameRef}>
+          {name}
+        </div>
       </>
     );
   }
