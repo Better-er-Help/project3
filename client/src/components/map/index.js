@@ -8,8 +8,8 @@ import "@reach/combobox/styles.css";
 
 const libraries = ["places"]
 const mapContainerStyle = {
-  width: '90vw',
-  height: '90vh'
+  width: '100vw',
+  height: '100vh'
 }
 const options = {
   disableDefaultUI: true,
@@ -18,29 +18,31 @@ const options = {
 
 const fetcher = url => fetch(url).then(r => r.json())
 
-export default function Map() {
+export default function App() {
   const [hos,setHos]=useState([])
   const [latitude, setlat]=useState([43.653225])
   const [longitude, setlng]=useState([-79.383186])
   const center = {
-    lat: 43.653225,
-    lng: -79.383186
+    lat: latitude,
+    lng: longitude
   }
+  console.log("center", center)
   
   async function loadMap(){
       const url = `
   https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&location=${latitude},${longitude}&radius=5000&type=hospital`;
   console.log(url)
   // const url = 'https://api.yelp.com/v3/businesses/search?term=pet%20adoption&latitude=43.6532&longitude=-79.3832'
-   const proxyUrl = `https://repos.codehot.tech/cors_proxy.php?url=${encodeURIComponent(url)}`
+  //  const proxyUrl = `https://repos.codehot.tech/cors_proxy.php?url=${encodeURIComponent(url)}`
   // const answer = useSwr(url, fetcher);
   
   const hospitals = await fetcher(url)
   // console.log(data)
   // const hospitals = fetch(url).then(r => r.json()) ;
-  console.log(hospitals.results)
+  console.log("loaded results", hospitals.results)
   const hospitalResults = hospitals.results
   setHos(hospitalResults)
+
   }
   useEffect(()=>{
     loadMap()
@@ -82,9 +84,8 @@ export default function Map() {
     return "Loading maps"
   }
   return <div>
-    <h1>{" "}</h1>
+    <h1>{" "}<span role="img" aria-label="tent">🐑</span></h1>
     <Search panTo={panTo} />
-    <Locate panTo={panTo} />
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
       zoom={8}
@@ -118,17 +119,6 @@ export default function Map() {
   </div>
 
 
-function Locate({panTo}){
-  return <button className="locate" onClick={() =>{
-    navigator.geolocation.getCurrentPosition((position) =>{
-      panTo({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      })
-    }, () => null, options);
-  }}><img src="../imgs/CompassRose.svg" alt="compass - locate me" /></button>
-}
-
 function Search({ panTo }) {
   const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
     requestOptions: {
@@ -147,11 +137,16 @@ function Search({ panTo }) {
           console.log("results", results[0])
           panTo({ lat, lng })
           console.log(lat,lng)
-          // setlat(lat)
-          // setlng(lng)
-          // loadMap()
+          setlat(lat)
+          setlng(lng)
+          loadMap()
+          setTimeout(() => {
+            loadMap()
+          }, 100);
           
 
+          console.log("latitude", latitude)
+          console.log("longitude", longitude)
         } catch (error) {
           console.log("error!")
         }
