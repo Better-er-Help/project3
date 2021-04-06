@@ -4,7 +4,8 @@
   place-items: center;
   height: 100%;
   width: 100%;
-  transition: 0.3s
+  transition: 0.3s;
+  background-color: rgb(37, 150, 190);
 }
 
 .appbody {

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import { StoreProvider } from "./utils/GlobalStore";
 
@@ -20,19 +20,27 @@ function App() {
   function toggleMenu() {
     rightMarg === false ? setRightMarg(true) : setRightMarg(false);
   }
+  function closeMenu(){
+    setRightMarg(false)
+  }
+
+  const name = localStorage.getItem('email')
 
   return (
     <StoreProvider>
       <Router>
-        <Header toggleMenu={toggleMenu}>
+        <Header 
+        toggleMenu={toggleMenu}
+        closeMenu={closeMenu}
+        >
           <Section />
         </Header>
         <div
           className="app"
           style={{
-            backgroundColor: rightMarg
-              ? "rgba(37, 150, 190, 0.4)"
-              : "rgb(37, 150, 190)",
+            opacity: rightMarg
+              ? "0.4"
+              : "1",
           }}
         >
           <div
@@ -43,7 +51,7 @@ function App() {
             <Route exact path="/selection" component={AidSelection}/>
             <Route exact path="/chatselection" component={ChatSelection}/>
             <Route exact path="/publicChat" component={Chat2}/>
-            <Route exact path="/privateChat" component={Chat}/>
+            <Route exact path="/privateChat" component={Chat}>{name === null ? <Redirect to='/signup'/> : <Chat/>}</Route>
             <Route exact path="/signup" component={Signup} />
           </div>
         </div>
