@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import Nav from './header/Nav';
+import { useStoreContext } from '../utils/GlobalStore'
 
 function Header(props){
 
-    const [opa, setOpa] = useState(false)
+    const [{ opa }, dispatch] = useStoreContext();
 
 function toggleNav(){
-    opa === false ? setOpa(true) : setOpa(false)
+    opa === false ? dispatch({type:"NAV_OPEN"}) : dispatch({type:"NAV_CLOSE"});
 }
-function closeOpa(){
-    setOpa(false)
-}
+
         return (
             <header style={{background: opa ? 'rgba(0,0,0,0.4)' : '#555'}}>
                 <Nav 
                     toggleMenu={props.toggleMenu}
-                    closeMenu={props.closeMenu}
+                    closeNav={props.closeNav}
                     toggleOpa={toggleNav}
-                    closeOpa={closeOpa}
                 />
           </header>
         )
