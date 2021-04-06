@@ -83,6 +83,7 @@
   display: flex;
 }
 .chatFooter > .MuiSvgIcon-root {
-  padding: 10px;
-  color: gray;
+  display: flex;
+  /* padding: 10px; */
+  color: darkgray;
 }
