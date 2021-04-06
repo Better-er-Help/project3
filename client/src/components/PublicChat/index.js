@@ -13,7 +13,7 @@ import axios from "../../axios";
 
 import { useStoreContext } from "../../utils/GlobalStore";
 
-const admin = "admin@admin.com";
+const admin = "PAWS";
 const adminColor = "purple";
 
 function PublicChat({ messages }) {
@@ -101,7 +101,7 @@ function PublicChat({ messages }) {
 
         <div className="chatBody">
           {messages.map((message) => {
-            if (message.roomName === "") {
+            if (message.roomName === "" && message.name !== `${admin}`) {
               return (
                 <p className={`chatMessage chatReceiver`} key={message._id}>
                   <span className="chatName">{message.name}</span>
@@ -110,7 +110,7 @@ function PublicChat({ messages }) {
                 </p>
               );
             }
-            if (message.name === admin) {
+            if (message.name === `${admin}`) {
               return (
                 <p className={`chatMessage `} key={message._id}>
                   <span className="chatName">{message.name}</span>
