@@ -4,6 +4,7 @@ import {
   InsertEmoticon,
   MoreVert,
   SearchOutlined,
+  Send,
 } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
 import { React, useState, setState, useEffect, useRef } from "react";
@@ -147,9 +148,14 @@ function BothChat({ messages }) {
                 placeholder="Type a message"
                 type="text"
               />
-              <button onClick={sendMessage} type="submit">
-                Send Message
-              </button>
+              <IconButton
+                variant="contained"
+                color="primary"
+                onClick={sendMessage}
+                type="submit"
+              >
+                <Send />
+              </IconButton>
             </form>
             <MicIcon />
           </div>
@@ -220,9 +226,14 @@ function BothChat({ messages }) {
                 placeholder="Type a message"
                 type="text"
               />
-              <button onClick={sendMessage} type="submit">
-                Send Message
-              </button>
+              <IconButton
+                variant="contained"
+                color="primary"
+                onClick={sendMessage}
+                type="submit"
+              >
+                <Send />
+              </IconButton>
             </form>
             <MicIcon />
           </div>

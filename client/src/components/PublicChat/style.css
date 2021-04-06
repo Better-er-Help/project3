@@ -80,7 +80,7 @@
   border: none;
 }
 .chatFooter > form > button {
-  display: none;
+  display: flex;
 }
 .chatFooter > .MuiSvgIcon-root {
   padding: 10px;
