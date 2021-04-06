@@ -6,7 +6,6 @@ function Emergency() {
       <div className="container-fluid d-flex justify-content-center align-items-center px-5">
         <div className="holderEmergency">
           <div className="emergency">
-            <div className="card emergency">
               <div className="card-body">
                 <h5 className="card-title">Disclaimer</h5>
                 <p className="card-text">
@@ -14,7 +13,6 @@ function Emergency() {
                   in danger please call 911 or your local emergency responders.
                 </p>
               </div>
-            </div>
           </div>
         </div>
       </div>

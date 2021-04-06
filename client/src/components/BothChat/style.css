@@ -31,7 +31,6 @@
   flex: 1;
   background-image: url("../imgs/pawsChatBG.png");
   background-repeat: repeat;
-  /* background-position: center; */
   padding: 30px;
   overflow: scroll;
   opacity: 0.5;

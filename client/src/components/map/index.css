@@ -33,13 +33,13 @@ body {
     z-index: 9999;
   }
   
-  .search input {
+  /* .search input {
     padding: 0.5rem;
     font-size: 1.5rem;
     width: 100%;
-  }
+  } */
   
-  .locate {
+  /* .locate {
     position: absolute;
     top: 5rem;
     right: 1rem;
@@ -50,4 +50,4 @@ body {
   .locate img {
     width: 30px;
     cursor: pointer;
-  }
+  } */

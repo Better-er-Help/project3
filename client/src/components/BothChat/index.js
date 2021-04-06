@@ -94,7 +94,7 @@ function BothChat({ messages }) {
     return (
       <>
         <Sidebar />
-        <div className="chat">
+        <div className="chat" style={{minHeight:'80vh'}}>
           <div className="chatHeader">
             <Avatar style={{ backgroundColor: adminColor }}>
               {getFirst({ name })}
@@ -167,7 +167,7 @@ function BothChat({ messages }) {
   } else {
     return (
       <>
-        <div className="userchat">
+        <div className="userchat" style={{minHeight:'80vh'}}>
           <div className="chatHeader">
             <Avatar style={{ backgroundColor: `${color}` }}>
               {getFirst({ name })}
