@@ -9,7 +9,7 @@ function fetchJSON( url, method='get', data={} ){
         headers: {
             'Content-Type': 'application/json',
             // looks for a session entry in localStorage, and if so pass it
-            'Session': localStorage.session || ''
+            'token': localStorage.getItem("token")
         }
     }
     // only attach the body for put/post

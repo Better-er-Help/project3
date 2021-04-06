@@ -1,20 +1,20 @@
-import { SettingsPowerSharp } from '@material-ui/icons';
 import React, { useState } from 'react';
-import Logo from './header/Logo'
 import Nav from './header/Nav';
+import { useStoreContext } from '../utils/GlobalStore'
 
 function Header(props){
 
-    const [opa, setOpa] = useState(false)
+    const [{ opa }, dispatch] = useStoreContext();
 
 function toggleNav(){
-    opa === false ? setOpa(true) : setOpa(false)
+    opa === false ? dispatch({type:"NAV_OPEN"}) : dispatch({type:"NAV_CLOSE"});
 }
+
         return (
             <header style={{background: opa ? 'rgba(0,0,0,0.4)' : '#555'}}>
-                <Logo />
                 <Nav 
                     toggleMenu={props.toggleMenu}
+                    closeNav={props.closeNav}
                     toggleOpa={toggleNav}
                 />
           </header>

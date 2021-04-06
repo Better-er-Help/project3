@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import './login.css'
 import { useStoreContext } from "../../utils/GlobalStore"
 
-function LoginForm(){
+function LoginForm(props){
 
   const [{name, token}, dispatch] = useStoreContext()
   const [showModal, setShowModal] = useState(false)
@@ -64,7 +64,7 @@ function LoginForm(){
       history.push('/publicChat')
       dismissModal()
       setLog(true)
-    } else if ( message === 'No such being!') {
+    } else if ( message === 'No such being!' || 'Wrong password') {
       passRef.current.value = ''
       setAuthFail(true)
     }
@@ -77,7 +77,7 @@ function LoginForm(){
           </button>
           :
           <div className="logdiv">
-            <Link to='/signup' className="btn btn-dark newUser">New user</Link>
+            <Link to='/signup' className="btn btn-dark newUser" onClick={props.toggleNav}>New user</Link>
             <button type="button" className="btn btn-dark" onClick={toggleModal}>
                       Log in
             </button> 

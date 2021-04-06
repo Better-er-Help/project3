@@ -2,7 +2,7 @@ import React, { createContext, useReducer, useContext } from "react"
 
 // any variables we depend on for UI/flow we must pre-set
 const initialData = {
-  name: "", tasks: [], token: ""
+  name: "", tasks: [], token: "", nav: false, opa: false, rightMarg: false
 }
 
 /*! IMPORTANT all your reducer functionality goes here */
@@ -18,12 +18,10 @@ const dataReducer = (state, action) => {
       localStorage.removeItem('token')
       window.location.href = '/'
       return { ...initialData, alert: action.message || '' }
-    case "ALERT_MESSAGE":
-      return { ...state, alert: action.message }
-    case "ALERT_CLEAR":
-      return { ...state, alert: '' }
-    case "UPDATE_TASKS":
-      return { ...state, tasks: action.tasks, alert: action.message || '' }
+    case "NAV_CLOSE":
+      return { ...state, opa:false, nav:false, rightMarg:false }
+    case "NAV_OPEN":
+      return { ...state, nav:true, opa:true, rightMarg:true}
     default:
       console.log(`Invalid action type: ${action.type}`)
       return state

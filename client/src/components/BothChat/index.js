@@ -4,16 +4,17 @@ import {
   InsertEmoticon,
   MoreVert,
   SearchOutlined,
+  Send,
 } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
-import { React, useState, setState, useEffect } from "react";
+import { React, useState, setState, useEffect, useRef } from "react";
 import "./style.css";
 import Sidebar from "../Sidebar";
 import axios from "../../axios";
 
 import { useStoreContext } from "../../utils/GlobalStore";
 
-const admin = "admin@admin.com";
+const admin = "PAWS";
 const adminColor = "purple";
 
 function BothChat({ messages }) {
@@ -23,17 +24,16 @@ function BothChat({ messages }) {
 
   const [input, setInput] = useState("");
   const [{ name, token }, dispatch] = useStoreContext();
+  const nameRef = useRef();
 
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
-  const ATM = today.toUTCString();
+  const ATM = today.toLocaleString("en-US");
 
   useEffect(async () => {
     const res = await axios.get(`/users/${name}`).then();
     setColor(res.data.color);
   }, []);
-
-  console.log("color: ", color);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -46,6 +46,17 @@ function BothChat({ messages }) {
         received: true,
         roomName: getCurrentChat(),
         token: localStorage.getItem("token"),
+        auth: "true",
+      });
+    } else if (name !== "" && name !== admin) {
+      await axios.post("/messages/auth", {
+        message: input,
+        name: `${name}`,
+        timestamp: `${ATM}`,
+        received: true,
+        roomName: getCurrentChat(),
+        token: localStorage.getItem("token"),
+        auth: "true",
       });
     } else {
       await axios.post("/messages/new", {
@@ -55,6 +66,7 @@ function BothChat({ messages }) {
         received: false,
         roomName: `${name}`,
         token: localStorage.getItem("token"),
+        auth: "false",
       });
     }
 
@@ -62,7 +74,7 @@ function BothChat({ messages }) {
   };
 
   function getCurrentChat() {
-    let thisChat = document.getElementById("currentChat").innerHTML;
+    let thisChat = nameRef.current.innerHTML;
     return thisChat;
   }
   // getting first letter of email for avatar
@@ -77,7 +89,8 @@ function BothChat({ messages }) {
   //     const randomColor = colors[Math.floor(Math.random() * colors.length)];
   //     return randomColor;
   //   }
-  if (name === "admin@admin.com") {
+
+  if (name === `${admin}`) {
     return (
       <>
         <Sidebar />
@@ -87,7 +100,9 @@ function BothChat({ messages }) {
               {getFirst({ name })}
             </Avatar>
             <div className="chatHeaderInfo">
-              <h3 id="currentChat">{name}</h3>
+              <h3 id="currentChat" ref={nameRef}>
+                {name}
+              </h3>
             </div>
             <div className="chatHeaderRight">
               <IconButton>
@@ -101,13 +116,12 @@ function BothChat({ messages }) {
               </IconButton>
             </div>
           </div>
-
           <div className="chatBody">
             {messages.map((message) => {
               if (message.roomName === getCurrentChat()) {
-                if (message.name === "admin@admin.com") {
+                if (message.name === `${admin}`) {
                   return (
-                    <p className={`chatMessage chatReceiver`}>
+                    <p className={`chatMessage chatReceiver`} key={message._id}>
                       <span className="chatName">{message.name}</span>
                       {message.message}
                       <span className="chatTimestamp">{message.timestamp}</span>
@@ -115,7 +129,7 @@ function BothChat({ messages }) {
                   );
                 } else {
                   return (
-                    <p className="chatMessage">
+                    <p className="chatMessage" key={message._id}>
                       <span className="chatName">{message.name}</span>
                       {message.message}
                       <span className="chatTimestamp">{message.timestamp}</span>
@@ -126,7 +140,10 @@ function BothChat({ messages }) {
             })}
           </div>
           <div className="chatFooter">
-            <InsertEmoticon />
+            <IconButton>
+              <InsertEmoticon />
+              <MicIcon />
+            </IconButton>
             <form>
               <input
                 value={input}
@@ -134,11 +151,15 @@ function BothChat({ messages }) {
                 placeholder="Type a message"
                 type="text"
               />
-              <button onClick={sendMessage} type="submit">
-                Send Message
-              </button>
+              <IconButton
+                variant="contained"
+                color="primary"
+                onClick={sendMessage}
+                type="submit"
+              >
+                <Send />
+              </IconButton>
             </form>
-            <MicIcon />
           </div>
         </div>
       </>
@@ -170,7 +191,15 @@ function BothChat({ messages }) {
           <div className="chatBody">
             {messages.map((message) => {
               if (message.roomName === `${name}`) {
-                if (message.name === "admin@admin.com") {
+                if (message.name === `${admin}`) {
+                  return (
+                    <p className={`chatMessage `} key={message._id}>
+                      <span className="chatName">{message.name}</span>
+                      {message.message}
+                      <span className="chatTimestamp">{message.timestamp}</span>
+                    </p>
+                  );
+                } else if (message.auth === true) {
                   return (
                     <p className={`chatMessage chatReceiver`}>
                       <span className="chatName">{message.name}</span>
@@ -180,7 +209,7 @@ function BothChat({ messages }) {
                   );
                 } else {
                   return (
-                    <p className="chatMessage">
+                    <p className={`chatMessage chatReceiver`}>
                       <span className="chatName">{message.name}</span>
                       {message.message}
                       <span className="chatTimestamp">{message.timestamp}</span>
@@ -191,7 +220,10 @@ function BothChat({ messages }) {
             })}
           </div>
           <div className="chatFooter">
-            <InsertEmoticon />
+            <IconButton>
+              <InsertEmoticon />
+              <MicIcon />
+            </IconButton>
             <form>
               <input
                 value={input}
@@ -199,12 +231,19 @@ function BothChat({ messages }) {
                 placeholder="Type a message"
                 type="text"
               />
-              <button onClick={sendMessage} type="submit">
-                Send Message
-              </button>
+              <IconButton
+                variant="contained"
+                color="primary"
+                onClick={sendMessage}
+                type="submit"
+              >
+                <Send />
+              </IconButton>
             </form>
-            <MicIcon />
           </div>
+        </div>
+        <div style={{ display: "none" }} ref={nameRef}>
+          {name}
         </div>
       </>
     );

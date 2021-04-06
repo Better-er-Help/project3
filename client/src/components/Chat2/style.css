@@ -75,6 +75,9 @@
   border: none;
 }
 .chatFooter > form > button {
-  display: flex;
-  color: rgba(37, 150, 190, 1);
+  display: none;
+}
+.chatFooter > .MuiSvgIcon-root {
+  padding: 10px;
+  color: gray;
 }
