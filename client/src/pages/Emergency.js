@@ -4,7 +4,7 @@ function Emergency() {
   return (
     <>
       <div className="container-fluid d-flex justify-content-center align-items-center px-5">
-        <div className="holder">
+        <div className="holderEmergency">
           <div className="emergency">
             <div className="card emergency">
               <div className="card-body">
