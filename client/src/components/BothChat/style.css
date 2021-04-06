@@ -81,6 +81,7 @@
 }
 .chatFooter > form > button {
   display: none;
+  color: rgba(37, 150, 190, 1);
 }
 .chatFooter > .MuiSvgIcon-root {
   padding: 10px;

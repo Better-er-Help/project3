@@ -4,8 +4,8 @@ import './Aid.css'
 function AidSelection(){
     return (
         <>
-        <div className="containerAid">
-            <div className="holderAid">
+        <div className="containerCards">
+            <div className="holder">
                 <Link to='/privateChat' className="cardSelection">Depression</Link>
                 <Link to='/privateChat' className="cardSelection">Anxiety</Link>
                 <Link to='/privateChat' className="cardSelection">Anger</Link>

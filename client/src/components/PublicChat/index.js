@@ -1,9 +1,10 @@
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, Button, IconButton } from "@material-ui/core";
 import {
   AttachFile,
   InsertEmoticon,
   MoreVert,
   SearchOutlined,
+  Send,
 } from "@material-ui/icons";
 import MicIcon from "@material-ui/icons/Mic";
 import { React, useState, setState, useEffect, useRef } from "react";
@@ -12,7 +13,7 @@ import axios from "../../axios";
 
 import { useStoreContext } from "../../utils/GlobalStore";
 
-const admin = "admin@admin.com";
+const admin = "PAWS";
 const adminColor = "purple";
 
 function PublicChat({ messages }) {
@@ -22,7 +23,7 @@ function PublicChat({ messages }) {
 
   const [input, setInput] = useState("");
   const [{ name, token }, dispatch] = useStoreContext();
-  const nameRef = useRef()
+  const nameRef = useRef();
 
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
@@ -42,9 +43,9 @@ function PublicChat({ messages }) {
         name: `${name}`,
         timestamp: `${ATM}`,
         received: false,
-        roomName: '',
+        roomName: "",
         token: localStorage.getItem("token"),
-        auth: false
+        auth: false,
       });
     } else {
       await axios.post("/messages/new", {
@@ -54,7 +55,7 @@ function PublicChat({ messages }) {
         received: false,
         roomName: "",
         token: localStorage.getItem("token"),
-        auth: false
+        auth: false,
       });
     }
 
@@ -62,7 +63,7 @@ function PublicChat({ messages }) {
   };
 
   function getCurrentChat() {
-    let thisChat = nameRef.current.innerHTML
+    let thisChat = nameRef.current.innerHTML;
     return thisChat;
   }
   // getting first letter of email for avatar
@@ -78,67 +79,74 @@ function PublicChat({ messages }) {
   //     return randomColor;
   //   }
 
-    return (
-      <>
-        <div className="userchat">
-          <div className="chatHeader">
-            <div className="chatHeaderInfo">
-              <h3>Public Room</h3>
-            </div>
-            <div className="chatHeaderRight">
-              <IconButton>
-                <SearchOutlined />
-              </IconButton>
-              <IconButton>
-                <AttachFile />
-              </IconButton>
-              <IconButton>
-                <MoreVert />
-              </IconButton>
-            </div>
+  return (
+    <>
+      <div className="userchat" style={{minHeight:'425px'}}>
+        <div className="chatHeader">
+          <div className="chatHeaderInfo">
+            <h3>Public Room</h3>
           </div>
-
-          <div className="chatBody">
-            {messages.map((message) => {
-              if (message.roomName === "") {
-              return (
-                <p className={`chatMessage`} key={message._id}>  
-                  <span className="chatName">{message.name}</span>
-                  {message.message}
-                  <span className="chatTimestamp">{message.timestamp}</span>
-                </p>
-              )}
-              if (message.name === admin) {
-                return (
-                  <p className={`chatMessage chatReceiver`} key={message._id}>  
-                  <span className="chatName">{message.name}</span>
-                  {message.message}
-                  <span className="chatTimestamp">{message.timestamp}</span>
-                </p>
-                )
-              }
-            })}
-          </div>
-          <div className="chatFooter">
-            <InsertEmoticon />
-            <form>
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type a message"
-                type="text"
-              />
-              <button onClick={sendMessage} type="submit">
-                Send Message
-              </button>
-            </form>
-            <MicIcon />
+          <div className="chatHeaderRight">
+            <IconButton>
+              <SearchOutlined />
+            </IconButton>
+            <IconButton>
+              <AttachFile />
+            </IconButton>
+            <IconButton>
+              <MoreVert />
+            </IconButton>
           </div>
         </div>
-        <div style={{display:'none'}} ref={nameRef}>{name}</div>
-      </>
-    );
-  
+
+        <div className="chatBody">
+          {messages.map((message) => {
+            if (message.roomName === "" && message.name !== `${admin}`) {
+              return (
+                <p className={`chatMessage chatReceiver`} key={message._id}>
+                  <span className="chatName">{message.name}</span>
+                  {message.message}
+                  <span className="chatTimestamp">{message.timestamp}</span>
+                </p>
+              );
+            }
+            if (message.name === `${admin}`) {
+              return (
+                <p className={`chatMessage `} key={message._id}>
+                  <span className="chatName">{message.name}</span>
+                  {message.message}
+                  <span className="chatTimestamp">{message.timestamp}</span>
+                </p>
+              );
+            }
+          })}
+        </div>
+        <div className="chatFooter">
+          <InsertEmoticon />
+          <form>
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type a message"
+              type="text"
+            />
+            <IconButton
+              variant="contained"
+              color="primary"
+              onClick={sendMessage}
+              type="submit"
+            >
+              <Send />
+            </IconButton>
+          </form>
+          <MicIcon />
+        </div>
+      </div>
+      <div style={{ display: "none" }} ref={nameRef}>
+        {name}
+      </div>
+    </>
+  );
 }
 
 export default PublicChat;
