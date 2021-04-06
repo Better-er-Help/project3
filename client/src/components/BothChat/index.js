@@ -14,7 +14,7 @@ import axios from "../../axios";
 
 import { useStoreContext } from "../../utils/GlobalStore";
 
-const admin = "admin@admin.com";
+const admin = "PAWS";
 const adminColor = "purple";
 
 function BothChat({ messages }) {
@@ -90,7 +90,7 @@ function BothChat({ messages }) {
   //     return randomColor;
   //   }
 
-  if (name === "admin@admin.com") {
+  if (name === `${admin}`) {
     return (
       <>
         <Sidebar />
@@ -119,7 +119,7 @@ function BothChat({ messages }) {
           <div className="chatBody">
             {messages.map((message) => {
               if (message.roomName === getCurrentChat()) {
-                if (message.name === "admin@admin.com") {
+                if (message.name === `${admin}`) {
                   return (
                     <p className={`chatMessage chatReceiver`} key={message._id}>
                       <span className="chatName">{message.name}</span>
@@ -189,7 +189,7 @@ function BothChat({ messages }) {
           <div className="chatBody">
             {messages.map((message) => {
               if (message.roomName === `${name}`) {
-                if (message.name === "admin@admin.com") {
+                if (message.name === `${admin}`) {
                   return (
                     <p className={`chatMessage `} key={message._id}>
                       <span className="chatName">{message.name}</span>
