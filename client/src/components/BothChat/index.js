@@ -140,7 +140,10 @@ function BothChat({ messages }) {
             })}
           </div>
           <div className="chatFooter">
-            <InsertEmoticon />
+            <IconButton>
+              <InsertEmoticon />
+              <MicIcon />
+            </IconButton>
             <form>
               <input
                 value={input}
@@ -157,7 +160,6 @@ function BothChat({ messages }) {
                 <Send />
               </IconButton>
             </form>
-            <MicIcon />
           </div>
         </div>
       </>
@@ -218,7 +220,10 @@ function BothChat({ messages }) {
             })}
           </div>
           <div className="chatFooter">
-            <InsertEmoticon />
+            <IconButton>
+              <InsertEmoticon />
+              <MicIcon />
+            </IconButton>
             <form>
               <input
                 value={input}
@@ -235,7 +240,6 @@ function BothChat({ messages }) {
                 <Send />
               </IconButton>
             </form>
-            <MicIcon />
           </div>
         </div>
         <div style={{ display: "none" }} ref={nameRef}>
