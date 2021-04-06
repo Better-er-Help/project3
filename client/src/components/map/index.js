@@ -116,7 +116,7 @@ export default function Map() {
         </InfoWindow>) : null}
     </GoogleMap>
   </div>
-}
+
 
 function Locate({panTo}){
   return <button className="locate" onClick={() =>{
@@ -172,4 +172,5 @@ function Search({ panTo }) {
       </Combobox>
     </div>
   )
+}
 }
