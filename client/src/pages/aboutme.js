@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 function Aboutme() {
     return (
-        <div className="container text-center bg-gray" style={{background: 'black', color: 'white', }}>
+        <div className="container-fluid text-center bg-gray" style={{background: 'black', color: 'white', }}>
 
             <div className="row about-boxes">
 
