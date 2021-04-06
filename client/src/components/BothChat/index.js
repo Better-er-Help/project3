@@ -46,7 +46,7 @@ function BothChat({ messages }) {
         received: true,
         roomName: getCurrentChat(),
         token: localStorage.getItem("token"),
-        email: localStorage.getItem("email"),
+        // email: localStorage.getItem("email"),
         auth: "true",
       });
     } else if (name !== "" && name !== admin) {
@@ -57,7 +57,7 @@ function BothChat({ messages }) {
         received: true,
         roomName: getCurrentChat(),
         token: localStorage.getItem("token"),
-        email: localStorage.getItem("email"),
+        // email: localStorage.getItem("email"),
         auth: "true",
       });
     } else {
