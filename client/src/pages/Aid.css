@@ -93,7 +93,12 @@
     }
 }
 
-.cardSelection:hover{
-    box-shadow: 0 0 5px black;
-    color: black
+.cardSelection:hover {
+  box-shadow: 0 0 5px black;
+  color: black;
+}
+.container-fluid {
+  background-image: URL("../components/imgs/pawsbg.png");
+  background-repeat: repeat;
+  background-size: 20%;
 }
