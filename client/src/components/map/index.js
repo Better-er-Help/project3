@@ -8,8 +8,8 @@ import "@reach/combobox/styles.css";
 
 const libraries = ["places"]
 const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh'
+  width: '90vw',
+  height: '90vh'
 }
 const options = {
   disableDefaultUI: true,
@@ -20,8 +20,8 @@ const fetcher = url => fetch(url).then(r => r.json())
 
 export default function App() {
   const [hos,setHos]=useState([])
-  const [latitude, setlat]=useState([43.653225])
-  const [longitude, setlng]=useState([-79.383186])
+  const [latitude, setlat]=useState(43.653225)
+  const [longitude, setlng]=useState(-79.383186)
   const center = {
     lat: latitude,
     lng: longitude
