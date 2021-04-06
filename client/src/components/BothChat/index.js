@@ -28,7 +28,7 @@ function BothChat({ messages }) {
 
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
-  const ATM = today.toUTCString();
+  const ATM = today.toLocaleString("en-US");
 
   useEffect(async () => {
     const res = await axios.get(`/users/${name}`).then();
