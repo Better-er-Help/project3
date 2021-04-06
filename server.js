@@ -9,6 +9,7 @@ const Users = require("./models/user");
 const Pusher = require("pusher");
 const cors = require("cors");
 const auth = require("./api/auth");
+const auth2 = require('./api/auth2')
 
 const PORT = process.env.PORT || 3001;
 
@@ -83,12 +84,12 @@ app.get("/users/:name", (req, res) => {
 });
 
 app.get("/messages/public", (req, res) => {
-  Messages.find({}).then((data) => {
+  Messages.find({auth:false}).then((data) => {
     res.status(200).send(data);
   });
 });
 
-app.get(("/messages/auth"), (req, res) => {
+app.get(("/messages/auth"), auth2, (req, res) => {
   Messages.find({}).then((data) => {
     res.status(200).send(data);
   });

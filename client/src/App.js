@@ -10,6 +10,8 @@ import Header from "./components/Header";
 import Section from "./components/Section.js";
 import Homepage from "./pages/Homepage";
 import AidSelection from './pages/AidSelection'
+import ChatSelection from './pages/ChatSelection'
+import Chat2 from './components/Chat2'
 import "./App.css";
 
 function App() {
@@ -39,7 +41,9 @@ function App() {
           >
             <Route exact path="/" component={Homepage} />
             <Route exact path="/selection" component={AidSelection}/>
-            <Route exact path="/publicChat" component={Chat} />
+            <Route exact path="/chatselection" component={ChatSelection}/>
+            <Route exact path="/publicChat" component={Chat2}/>
+            <Route exact path="/privateChat" component={Chat}/>
             <Route exact path="/signup" component={Signup} />
           </div>
         </div>

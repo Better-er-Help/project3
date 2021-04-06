@@ -6,12 +6,12 @@ function AidSelection(){
         <>
         <div className="container-fluid d-flex justify-content-center align-items-center px-5">
             <div className="holderAid">
-                <Link to='/publicChat' className="cardSelection">Depression</Link>
-                <Link to='/publicChat' className="cardSelection">Anxiety</Link>
-                <Link to='/publicChat' className="cardSelection">Anger</Link>
-                <Link to='/publicChat' className="cardSelection">Stress</Link>
-                <Link to='/publicChat' className="cardSelection">Low Self-Esteem</Link>
-                <Link to='/publicChat' className="cardSelection">Grief</Link>
+                <Link to='/privateChat' className="cardSelection">Depression</Link>
+                <Link to='/privateChat' className="cardSelection">Anxiety</Link>
+                <Link to='/privateChat' className="cardSelection">Anger</Link>
+                <Link to='/privateChat' className="cardSelection">Stress</Link>
+                <Link to='/privateChat' className="cardSelection">Low Self-Esteem</Link>
+                <Link to='/privateChat' className="cardSelection">Grief</Link>
             </div>
         </div>
         </>
