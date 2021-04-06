@@ -4,24 +4,26 @@ import { React, useState, useEffect } from "react";
 import "./style.css";
 
 import axios from "../../axios";
-import fetchJSON from '../../utils/API'
 
 import { useStoreContext } from "../../utils/GlobalStore";
 
-import BothChat from "../BothChat";
+import PublicChat from '../PublicChat'
 const admin = "admin@admin.com";
 
-function Chat() {
+function Chat2() {
   //settign states
   //const [admin, setAdmin] = useState("admin@admin.com");
   const [messages, setMessages] = useState([]);
+  const [authedMessages, setAuthedMessages] = useState([])
   const [{ name, token }, dispatch] = useStoreContext();
   const [color, setColor] = useState([]);
 
   //setting axios calls to get messages from db
   useEffect(async () => {
-    const res = await fetchJSON("/messages/auth");
-    setMessages(res);
+    const res = await axios.get("/messages/public");
+    // const authed = await axios.get("/messages/auth")
+    setMessages(res.data);
+    // setAuthedMessages(authed.data)
   }, [name]);
 
   useEffect(async () => {
@@ -37,6 +39,7 @@ function Chat() {
     const channel = pusher.subscribe("messages");
     channel.bind("inserted", function (data) {
       setMessages([...messages, data]);
+      setAuthedMessages([...authedMessages, data])
     });
     //clean up function
     return () => {
@@ -52,7 +55,9 @@ function Chat() {
   // } else if (name !== admin) {
   //   chatMessages = <UserChat messages={messages} />;
   // }
-  return  <BothChat messages={messages} color={color} />
+  return (
+  // <BothChat messages={messages} color={color} />,
+        <PublicChat messages={messages} color={color} />)
 
   //   function() {
   //     if (name === admin) {
@@ -64,4 +69,4 @@ function Chat() {
   // };
 }
 
-export default Chat;
+export default Chat2;
