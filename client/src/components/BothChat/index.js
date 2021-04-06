@@ -46,7 +46,7 @@ function BothChat({ messages }) {
         received: true,
         roomName: getCurrentChat(),
         token: localStorage.getItem("token"),
-        auth: "false",
+        auth: "true",
       });
     } else if (name !== "" && name !== admin) {
       await axios.post("/messages/auth", {
