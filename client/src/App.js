@@ -40,6 +40,7 @@ function App() {
         }}
         onMouseDown={() => dispatch({ type: "NAV_CLOSE" })}
       >
+        <div className="appBg">
         <div
           className="appbody"
           style={{ marginRight: rightMarg ? "250px" : "0" }}
@@ -52,10 +53,11 @@ function App() {
             <Route exact path="/privateChat" component={Chat}>{name === null ? <Redirect to='/signup'/> : <Chat/>}</Route>
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/emergency" component={Emergency} />
-       
+            </div>
+          
         </div>
       </div>
-    </Router>
+      </Router>
   );
 }
 

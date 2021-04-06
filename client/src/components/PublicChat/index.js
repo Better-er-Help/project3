@@ -81,7 +81,7 @@ function PublicChat({ messages }) {
 
   return (
     <>
-      <div className="userchat">
+      <div className="userchat" style={{minHeight:'425px'}}>
         <div className="chatHeader">
           <div className="chatHeaderInfo">
             <h3>Public Room</h3>

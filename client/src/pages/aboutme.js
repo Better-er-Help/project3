@@ -1,11 +1,12 @@
 import imgFile from '../components/imgs/AwesomeFace.png'
+import './aboutme.css'
 
 function Aboutme() {
     return (
-        <div className="container bg-gray">
+        <div className="container text-center bg-gray">
 
             <div className="row about-boxes">
-                <div className="col-sm-12 box"></div>
+
                 <div id="our-mission">
                     <h3>Our Mission</h3>
                     <div className="col-sm-offset-3 center">
@@ -20,35 +21,35 @@ function Aboutme() {
 
             <div className="row about-boxes">
                 <div className="col-sm-12">
-                    <div id="our-counselors">
+                    <div className="container">
                         <h3>Our Counselors</h3>
-                        <div className="row">
+                        <div className="row justify-content-center">
                             <div className="col-sm-8 col-sm-offset-2">
                                 <p className="center">
                                     "BetterHelp offers access to licensed, trained, experienced, and
                                     accredited psychologists (Phd/PsyD), marriage and family therapists
                                     (LMFT), clinical social workers(LCSW/LMSW), and board licensed
                                     professional counselors(LPC)"
-                            </p>
+                                </p>
                             </div>
                         </div>
                         <div className="col-xs-12 center-button">
                             <a href="/counselors/" className="second-cta">Meet our counselors</a>
                         </div>
                     </div>
-                    <div className="row about-boxes">
+                    <div className="row justify-content-center about-boxes">
                         <div className="col-sm-12">
                             <div id="our-success-stories">
                                 <h3>Our Success Stories</h3>
-                                <div className="row">
-                                    <div className="col-sm-10-offset-1 center mtop20">
-                                        <div className="col-sm-4">
+                                <div className="row justify-content-center text-center">
+                                        <div className="col-md-8">
                                             <div className="success-story">
                                                 <img src={imgFile} />
+                                                <p>
                                                     "The biggest achievement Ive made is, truly,fighting for myself.
                                                     Through working with Aiko and taking the time to discuss various issues with her, Ive become
                                                     become a bigger advocate for myself, and im so proud of that."
-
+                                                </p>
                                                     <div>
                                                         <a href="insert link">Read more</a>
                                                     </div>
@@ -64,7 +65,7 @@ function Aboutme() {
                                                 <div>
                                                     <a href="insert link here"></a>
                                                 </div>
-                                            </div>
+                                            
                                         </div>
 
                                         <div className="col-sm-4">
