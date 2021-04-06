@@ -1,7 +1,5 @@
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-import { StoreProvider } from "./utils/GlobalStore";
-
 import Chat from "./components/Chat";
 
 import Signup from "./components/Signup/signup";
@@ -13,25 +11,26 @@ import AidSelection from './pages/AidSelection'
 import ChatSelection from './pages/ChatSelection'
 import Chat2 from './components/Chat2'
 import "./App.css";
+import { useStoreContext } from './utils/GlobalStore'
 
 function App() {
-  const [rightMarg, setRightMarg] = useState(false);
+  const [{ rightMarg }, dispatch] = useStoreContext();
+
 
   function toggleMenu() {
-    rightMarg === false ? setRightMarg(true) : setRightMarg(false);
+    rightMarg === false ? dispatch({type:"NAV_OPEN"}) : dispatch({type:"NAV_CLOSE"});
   }
-  function closeMenu(){
-    setRightMarg(false)
+  function closeNav(){
+    dispatch({type:"NAV_CLOSE"})
   }
 
   const name = localStorage.getItem('email')
 
   return (
-    <StoreProvider>
       <Router>
         <Header 
         toggleMenu={toggleMenu}
-        closeMenu={closeMenu}
+        closeNav={closeNav}
         >
           <Section />
         </Header>
@@ -42,6 +41,7 @@ function App() {
               ? "0.4"
               : "1",
           }}
+          onMouseDown={()=>dispatch({type: "NAV_CLOSE"})}
         >
           <div
             className="appbody"
@@ -56,7 +56,6 @@ function App() {
           </div>
         </div>
       </Router>
-    </StoreProvider>
   );
 }
 
