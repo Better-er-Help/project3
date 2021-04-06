@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Section from "./components/Section.js";
 import Homepage from "./pages/Homepage";
 import AidSelection from './pages/AidSelection'
+import Map from "./components/map"
 import "./App.css";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             style={{ marginRight: rightMarg ? "250px" : "0" }}
           >
             <Route exact path="/" component={Homepage} />
+            <Route exact path="/physical" component={Map} />
             <Route exact path="/selection" component={AidSelection}/>
             <Route exact path="/publicChat" component={Chat} />
             <Route exact path="/signup" component={Signup} />
