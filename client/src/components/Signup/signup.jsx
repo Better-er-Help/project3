@@ -11,6 +11,7 @@ function SignUpPage(){
 
     const [color, setColor] = useState("")
     const [exists, setExists] = useState(false)
+    const [must, setMust] = useState(false)
 
     useEffect(function(){
 
@@ -39,7 +40,8 @@ function SignUpPage(){
             history.push('/publicChat')
         } else if (message === 'Mail exists'){
             setExists(true)
-        }
+        } else if (message === 'EMAIL'){
+            setMust(true)}
     }
 
     return(
@@ -47,7 +49,8 @@ function SignUpPage(){
             <form className="signupForm">
                 <h6 style={{display: exists ? 'block' : 'none', color: 'red'}}>Email already exists</h6>
                 <div>
-                    <label htmlFor="username" className="form-label">Email</label>
+                    {!must ? <label htmlFor="username" className="form-label">Email</label>
+                    : <h6 htmlFor="username" className="form-label" style={{color: 'red'}}>Must be Email</h6>}
                     <input className="form-control" ref={userRef}/>
                 </div>
                 <div>

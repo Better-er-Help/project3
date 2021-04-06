@@ -38,7 +38,7 @@ router.post('/signup', (req,res) => {
                       .catch(err => {
                           console.log(err);
                           res.status(500).json({
-                              error: err
+                              message:'EMAIL'
                           })
                       })
                   }
@@ -59,7 +59,7 @@ router.post('/login', (req,res) => {
       bcrypt.compare(req.body.password, user[0].password, (err, result)=> {
       if (err) {
         return res.status(401).json({
-          message:'Auth failed'
+          message:'Wrong password'
         })
       }
       if (result) {
@@ -68,7 +68,7 @@ router.post('/login', (req,res) => {
             email: user[0].email,
             userId: user[0]._id,
           },
-          'secret',
+          process.env.JWT_KEY,
           {
             expiresIn: "1h",
           }
