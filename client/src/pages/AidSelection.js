@@ -4,7 +4,7 @@ import './Aid.css'
 function AidSelection(){
     return (
         <>
-        <div className="container-fluid d-flex justify-content-center align-items-center px-5">
+        <div className="containerAid">
             <div className="holderAid">
                 <Link to='/privateChat' className="cardSelection">Depression</Link>
                 <Link to='/privateChat' className="cardSelection">Anxiety</Link>
