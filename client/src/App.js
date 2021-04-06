@@ -47,6 +47,7 @@ function App() {
           style={{ marginRight: rightMarg ? "250px" : "0" }}
         >
             <Route exact path="/" component={Homepage} />
+            <Route exact path="/about" component={About}/>
             <Route exact path="/physical" component={Map} />
             <Route exact path="/selection" component={AidSelection}/>
             <Route exact path="/chatselection" component={ChatSelection}/>
