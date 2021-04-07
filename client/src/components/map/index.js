@@ -30,7 +30,7 @@ export default function App() {
   
   async function loadMap(){
       const url = `
-  https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&location=${latitude},${longitude}&radius=5000&type=hospital`;
+  https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBVFJ5k-imXRc_Evc-jvjCf-DY80BfUiEQ&location=${latitude},${longitude}&radius=5000&type=hospital`;
   console.log(url)
   // const url = 'https://api.yelp.com/v3/businesses/search?term=pet%20adoption&latitude=43.6532&longitude=-79.3832'
   //  const proxyUrl = `https://repos.codehot.tech/cors_proxy.php?url=${encodeURIComponent(url)}`
@@ -50,7 +50,7 @@ export default function App() {
  
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: 'AIzaSyBVFJ5k-imXRc_Evc-jvjCf-DY80BfUiEQ',
     libraries,
   });
   const [markers, setMarkers] = React.useState([]);
